@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 platforms :jruby do
-  gem 'torquebox'
-  gem 'torquebox-server'
+#  gem 'torquebox'
+#  gem 'torquebox-server'
   gem 'activerecord-jdbcsqlite3-adapter'
 end
 
