@@ -1,9 +1,5 @@
 /*
 
- this module offers image helpers - to display spinners for images, if they haven't loaded
-
- use only this one:
-
  <img image-helper ng-model="modelWithUrl" />
 
  */
@@ -15,13 +11,12 @@ angular.module('directives.imageHelpers', [])
   .directive('imageLoader', [ '$rootScope', function ($rootScope) {
     return {
       restrict: 'EA',
-      templateUrl: '/partials/directives/image-loader.html',
+      //templateUrl: '/partials/directives/image-loader.html',
+      template: '<div><img ng-show="!hasLoaded" ng-src="/images/spinner.gif"/><img ng-show="hasLoaded" ng-src="{{url}}" onload/></div>',
       transclude: true,
       replace: true,
       scope: {  },
       require: 'ngModel',
-      // usually we don't need this - but the "onload" directive used in this directive's template (see templateUrl)
-      // will communicate through this ctrl and set hasLoaded to 'true'
       controller: function ($scope) {
         $scope.hasLoaded = false;
 
@@ -33,15 +28,12 @@ angular.module('directives.imageHelpers', [])
       link: function (scope, element, attrs, ctrl) {
 
         var origin = 'directive:imageHelper';
-
         scope.hasLoaded = false;
-
-        $rootScope.appLogger.log('have url:' + scope.url, origin);
-
+//        $rootScope.appLogger.log('have url:' + scope.url, origin);
         scope.onWatch = function(){
           scope.$watch(ctrl.$viewValue, function () {
             scope.url = ctrl.$viewValue;
-            $rootScope.appLogger.log('setting url:' + scope.url, origin);
+//            $rootScope.appLogger.log('setting url:' + scope.url, origin);
           });
         };
 
@@ -52,8 +44,7 @@ angular.module('directives.imageHelpers', [])
 
         // we receive this signal from bookingCtrl if hotelData has loaded successfully
         scope.$on('sig::hotelData::received', function (e) {
-          $rootScope.appLogger.log('received sig::hotelData::received', origin);
-          // do a little callback trick to get the view value after several asynchronous events happening here
+//          $rootScope.appLogger.log('received sig::hotelData::received', origin);
           scope.onWatch();
         });
 
