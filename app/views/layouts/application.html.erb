@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html>
+<!--[if IE 8]>
+<html xmlns:ng="http://angularjs.org"
+      id="ng-app" "ng-app"="AngularApp" class="lt-ie9 ng-app:AngularApp" lang="de">
+<![endif]-->
+<!--
+  [if gt IE 8]>
+  <!
+-->
+<html ng-app="AngularApp" lang="de">
+<!--
+  <![endif]
+-->
 <head>
-  <title>App</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <title>Angular + Rails Base App</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => false %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
   <%= csrf_meta_tags %>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
 </head>
 <body>
 
