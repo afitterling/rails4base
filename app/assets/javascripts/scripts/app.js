@@ -8,7 +8,6 @@ var app = angular.module('AngularApp', [
   // apps modules
   'interceptors',
   'ctrls.session',
-  'ctrls.signUp',
   'sessionService'
 ]);
 
