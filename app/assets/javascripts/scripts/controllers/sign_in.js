@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('ctrls.session', [])
+var app = angular.module('ctrls.signUp', []);
 
-  .controller('SessionCtrl',
+app.controller('SignInCtrl',
     ['$scope', '$rootScope', '$resource', '$http',
       function ($scope, $rootScope, $resource, $http) {
 
