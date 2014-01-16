@@ -5,15 +5,16 @@ angular.module('sessionService', [])
       url = url || '/';
       $location.path(url);
     }
+    var interceptor = {};
     var service = {
       login: function(email, password) {
-        return $http.post('/login', {user: {email: email, password: password} })
+        return $http.post('/users/sign_in', {user: {email: email, password: password} })
           .then(function(response) {
             service.currentUser = response.data.user;
             if (service.isAuthenticated()) {
               //TODO: Send them back to where they came from
               //$location.path(response.data.redirect);
-              $location.path('/record');
+              //$location.path('/record');
             }
           });
       },

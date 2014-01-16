@@ -14,4 +14,6 @@
 //=require_tree ./scripts/controllers
 //=require_tree ./scripts/directives
 //=require_tree ./scripts/modules
+//=require_tree ./scripts/services
+//=require_tree ./scripts/interceptors
 
