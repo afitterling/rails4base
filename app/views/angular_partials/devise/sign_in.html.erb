@@ -10,7 +10,7 @@
 
             <p ng-show="SignInForm.email.$error.required"><span class="text-warning">Fill in your email address!</span></p>
             <p ng-show="SignInForm.email.$error.pattern"><span class="text-danger">Needs valid pattern such as e.g. name@domain.com!</span></p>
-            <p ng-show="SignInForm.email.$valid"><span class="text-success">Looks good!</span></p>
+            <p ng-show="SignInForm.email.$valid"><span class="text-success">Looks good.</span></p>
             <p class="input-group" ng-class="{ 'has-error': SignInForm.email.$error.pattern || SignInForm.email.$error.required }">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
                 <input id="email" type="email" class="form-control input-large" ng-model="email" name="email" ng-pattern="EMAIL_REGEXP" placeholder="" required />
@@ -20,7 +20,7 @@
 
             <p ng-show="SignInForm.password.$error.required"><span class="text-warning">Type password!</span></p>
             <p ng-show="SignInForm.password.$error.minlength"><span class="text-danger">too short!</span></p>
-            <p ng-show="SignInForm.password.$valid"><span class="text-success">see if it fits - hit submit!</span></p>
+            <p ng-show="SignInForm.password.$valid"><span class="text-success">hit enter key or click submit if you think password is complete.</span></p>
 
             <p class="input-group" ng-class="{ 'has-error': SignInForm.password.$error.required || SignInForm.password.$error.minlength }">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
@@ -30,7 +30,7 @@
 
 
             <p class="text-center">
-                <button type="submit" ng-disabled='!SignInForm.$valid || sent' class="btn btn-success btn-large">
+                <button style="" type="submit" ng-disabled='!SignInForm.$valid || sent' class="btn btn-success btn-large">
                     <!--<span ng-hide="sent || pending">Send Message</span>-->
                     <!--<span ng-show="sent">Message sent.</span>-->
                     <!--<span ng-show="pending">Please, wait ...</span>-->
