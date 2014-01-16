@@ -1,10 +1,13 @@
 <div class="row">
-    <div class="col-lg-6 col-offset-3 panel" ng-show="!userLoggedIn">
+    <div class="col-lg-6 col-offset-3">
 
-        <h3 class="margin-base-vertical">Sign in form</h3>
+        <div ng-show="userLoggedIn">
+            {{currentUser | json}}
+            <button class="btn">logout</button>
+        </div>
 
-        <!-- <h3 class="margin-base-vertical">Leave a message</h3> -->
-        <form name="SignInForm" ng-controller="SessionCtrl" class="margin-base-vertical" ng-submit="login()" novalidate>
+        <form name="SignInForm" ng-controller="SessionCtrl" class="margin-base-vertical" ng-submit="login()" novalidate ng-show="!userLoggedIn">
+            <h3 class="margin-base-vertical">Sign In Form</h3>
 
             <div class="panel panel-danger" ng-show="failed">
                 <div class="panel-body">
@@ -20,19 +23,28 @@
 
             <label for="email">Your Email address</label>
 
-            <p ng-show="SignInForm.email.$error.required"><span class="text-warning">Fill in your email address!</span></p>
-            <p ng-show="SignInForm.email.$error.pattern"><span class="text-danger">Needs valid pattern such as e.g. name@domain.com!</span></p>
-            <p ng-show="SignInForm.email.$valid"><span class="text-success">This is a valid pattern for an email.</span></p>
+            <p ng-show="SignInForm.email.$error.required"><span class="text-warning">Fill in your email address!</span>
+            </p>
+
+            <p ng-show="SignInForm.email.$error.pattern">
+                <span class="text-danger">Needs valid pattern such as e.g. name@domain.com!</span></p>
+
+            <p ng-show="SignInForm.email.$valid"><span class="text-success">This is a valid pattern for an email.</span>
+            </p>
+
             <p class="input-group" ng-class="{ 'has-error': SignInForm.email.$error.pattern || SignInForm.email.$error.required }">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                <input id="email" type="email" class="form-control input-large" ng-model="email" name="email" ng-pattern="EMAIL_REGEXP" placeholder="" required />
+                <input id="email" type="email" class="form-control input-large" ng-model="email" name="email" ng-pattern="EMAIL_REGEXP" placeholder="" required/>
             </p>
 
             <label>Your Password</label>
 
             <p ng-show="SignInForm.password.$error.required"><span class="text-warning">Type password!</span></p>
+
             <p ng-show="SignInForm.password.$error.minlength"><span class="text-danger">Too short!</span></p>
-            <p ng-show="SignInForm.password.$valid"><span class="text-success">Hit enter key or click submit if you think password is complete.</span></p>
+
+            <p ng-show="SignInForm.password.$valid">
+                <span class="text-success">Hit enter key or click submit if you think password is complete.</span></p>
 
             <p class="input-group" ng-class="{ 'has-error': SignInForm.password.$error.required || SignInForm.password.$error.minlength }">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
@@ -47,5 +59,6 @@
             </p>
 
         </form>
+
     </div>
 </div>

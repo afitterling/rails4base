@@ -16,9 +16,8 @@ app.controller('SessionCtrl',
         Session.login($scope.email, $scope.password, function (data, status) {
 
           // success
-          $scope.logger.log(data, origin);
-          $scope.logger.log('User=', origin);
-          $scope.logger.log(Session.currentUser, origin);
+          $rootScope.currentUser = Session.currentUser;
+          $rootScope.userLoggedIn = true;
 
         }, function (data, status) {
 

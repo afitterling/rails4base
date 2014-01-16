@@ -30,7 +30,7 @@ angular.module('sessionService', [])
       },
 
       register: function (email, password, confirm_password) {
-        return $http.post('/users.json', {user: {email: email, password: password, password_confirmation: confirm_password} })
+        return $http.post('/users/sign_up', {user: {email: email, password: password, password_confirmation: confirm_password} })
           .then(function (response) {
             service.currentUser = response.data;
             if (service.isAuthenticated()) {
