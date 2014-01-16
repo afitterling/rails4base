@@ -3,14 +3,18 @@
 var app = angular.module('AngularApp', [
   // vendor angular stuff
   'ngResource',
+  // debugging
+  'debug',
   // apps modules
   'ctrls.session',
-  'ctrls.signUp'
+  'ctrls.signUp',
 ]);
 
 
-app.run(['$rootScope',function($rootScope, $http){
+app.run(['$rootScope','$http', 'logService', function($rootScope, $http, logService){
   // init some stuff
+
+  $rootScope.logger = logService;
 
   // regular expressions needed for validations
   $rootScope.EMAIL_REGEXP = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;

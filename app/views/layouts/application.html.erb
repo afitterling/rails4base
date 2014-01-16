@@ -12,20 +12,30 @@
   <![endif]
 -->
 <head>
-  <title>Angular + Rails Base App</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => false %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
-  <%= csrf_meta_tags %>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
+    <title>Angular + Rails Base App</title>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => false %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
+    <%= csrf_meta_tags %>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
 </head>
 <body>
 
-<% if Rails.env.development? %>
-    {{40+4}}
-<% end %>
+<div class="row">
+    <% if Rails.env.development? %>
+        <div class="col-lg-4">
+            <em>{{40+4}}</em>
 
-<%= yield %>
+            <div style="float: none;">
+                <button ng-click="showConsole=!showConsole">toggle console</button>
+                <!-- <input name="topic" type="text" ng-model="logFilter" ng-show="showConsole" style="border: 1px solid grey;"> -->
+                <div console="" messages="loggerService" ng-show="showConsole"></div>
+            </div>
+        </div>
+    <% end %>
+
+    <%= yield %>
+</div>
 
 </body>
 </html>

@@ -6,7 +6,8 @@ app.controller('SignInCtrl',
     ['$scope', '$rootScope', '$resource', '$http',
       function ($scope, $rootScope, $resource, $http) {
 
-        console.log('I am here!');
+        var origin = 'SignInCtrl';
 
+        $scope.logger.log('Hello!', origin);
 
       }]);

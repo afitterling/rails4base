@@ -6,7 +6,8 @@ angular.module('ctrls.session', [])
     ['$scope', '$rootScope', '$resource', '$http',
       function ($scope, $rootScope, $resource, $http) {
 
-        console.log('I am here!');
+        var origin = 'SessionCtrl';
 
+        $scope.logger.log('I am here!', origin);
 
       }]);

@@ -12,4 +12,6 @@
 
 //=require scripts/app
 //=require_tree ./scripts/controllers
+//=require_tree ./scripts/directives
+//=require_tree ./scripts/modules
 
