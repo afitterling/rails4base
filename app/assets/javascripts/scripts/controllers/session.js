@@ -4,32 +4,33 @@ var app = angular.module('ctrls.session', []);
 
 app.controller('SessionCtrl',
   ['$scope', '$rootScope', '$resource', '$http', '$timeout', 'Session',
-    function ($scope, $rootScope, $resource, $http, $timeout) {
+    function ($scope, $rootScope, $resource, $http, $timeout, Session) {
 
       var origin = 'SessionCtrl';
 
       $scope.logger.log('Hello!', origin);
 
+      // gets called upon signin click
       $scope.login = function () {
-        $scope.logger.log('login func triggered', origin);
 
-        $http.post('/users/sign_in', {user: {email: $scope.email, password: $scope.password} }).success(function (data, status) {
-//          console.log(data);
-//          console.log(status);
-          if (status === 200) {
-            console.log(data);
-          }
-        }).error(function (data, status, headers, config) {
-            console.log(status);
-            if (status === 401) {
-              $scope.failed = true;
-              $timeout(function () {
-                $scope.failed = false;
-                $scope.retry = true;
-              }, 4000);
-            }
-          });
+        Session.login($scope.email, $scope.password, function (data, status) {
 
+          // success
+          $scope.logger.log(data, origin);
+          $scope.logger.log('User=', origin);
+          $scope.logger.log(Session.currentUser, origin);
+
+        }, function (data, status) {
+
+          // error
+          $scope.logger.log(data, origin);
+          $scope.failed = true;
+          $timeout(function () {
+            $scope.failed = false;
+            $scope.retry = true;
+          }, 4000);
+
+        });
       };
 
     }]);

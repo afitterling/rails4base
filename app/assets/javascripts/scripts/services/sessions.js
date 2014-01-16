@@ -1,45 +1,49 @@
 angular.module('sessionService', [])
-  .factory('Session', function($location, $http, $q) {
+  .factory('Session', function ($location, $http, $q) {
     // Redirect to the given url (defaults to '/')
     function redirect(url) {
       url = url || '/';
       $location.path(url);
     }
+
     var interceptor = {};
     var service = {
-      login: function(email, password) {
-        return $http.post('/users/sign_in', {user: {email: email, password: password} })
-          .then(function(response) {
-            service.currentUser = response.data.user;
-            if (service.isAuthenticated()) {
-              //TODO: Send them back to where they came from
-              //$location.path(response.data.redirect);
-              //$location.path('/record');
+
+      login: function (email, password, successCallback, errorCallback) {
+        $http.post('/users/sign_in', {user: {email: email, password: password} })
+          .success(function (data, status) {
+            if (status === 200) {
+              service.currentUser = data.user;
+              successCallback(data, status);
             }
+          }).error(function (data, status, headers, config) {
+            errorCallback(data, status);
           });
+        return;
       },
 
-      logout: function(redirectTo) {
-        $http.post('/logout').then(function() {
+      logout: function (redirectTo) {
+        $http.post('/logout').then(function () {
           service.currentUser = null;
           redirect(redirectTo);
         });
       },
 
-      register: function(email, password, confirm_password) {
+      register: function (email, password, confirm_password) {
         return $http.post('/users.json', {user: {email: email, password: password, password_confirmation: confirm_password} })
-          .then(function(response) {
+          .then(function (response) {
             service.currentUser = response.data;
             if (service.isAuthenticated()) {
               $location.path('/record');
             }
           });
       },
-      requestCurrentUser: function() {
+
+      requestCurrentUser: function () {
         if (service.isAuthenticated()) {
           return $q.when(service.currentUser);
         } else {
-          return $http.get('/current_user').then(function(response) {
+          return $http.get('/current_user').then(function (response) {
             service.currentUser = response.data.user;
             return service.currentUser;
           });
@@ -48,9 +52,10 @@ angular.module('sessionService', [])
 
       currentUser: null,
 
-      isAuthenticated: function(){
+      isAuthenticated: function () {
         return !!service.currentUser;
       }
     };
+
     return service;
   });
