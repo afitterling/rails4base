@@ -12,7 +12,7 @@
             <p ng-show="SignInForm.email.$error.pattern"><span class="text-danger">Needs valid pattern such as e.g. name@domain.com!</span></p>
             <p ng-show="SignInForm.email.$valid"><span class="text-success">Looks good!</span></p>
             <p class="input-group" ng-class="{ 'has-error': SignInForm.email.$error.pattern || SignInForm.email.$error.required }">
-                <span class="input-group-addon"><span class="icon-envelope"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
                 <input id="email" type="email" class="form-control input-large" ng-model="email" name="email" ng-pattern="EMAIL_REGEXP" placeholder="" required />
             </p>
 
@@ -23,7 +23,7 @@
             <p ng-show="SignInForm.password.$valid"><span class="text-success">see if it fits - hit submit!</span></p>
 
             <p class="input-group" ng-class="{ 'has-error': SignInForm.password.$error.required || SignInForm.password.$error.minlength }">
-                <span class="input-group-addon"><span class="icon-pencil"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
                 <input type="password" class="form-control input-large" ng-model="password" name="password"
                        ng-pattern="" placeholder="" ng-minlength="8" required=""/>
             </p>
