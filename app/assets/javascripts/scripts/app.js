@@ -1,7 +1,10 @@
 'use strict';
 
 var app = angular.module('AngularApp', [
-
+  // vendor angular stuff
+  'ngResource',
+  // apps modules
+  'ctrls.session'
 ]);
 
 //app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
