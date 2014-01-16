@@ -19,11 +19,17 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 </head>
+
 <body>
+
+<!--[if lt IE 9]>
+<p class="browsehappy">We are sorry, you are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to run this app.</p>
+<![endif]-->
 
 <div class="row">
     <% if Rails.env.development? %>
-        <div class="col-lg-4">
+        <div class="col-lg-12">
             <em>{{40+4}}</em>
 
             <div style="float: none;">

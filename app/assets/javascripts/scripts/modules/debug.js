@@ -21,7 +21,7 @@ module.factory('logService', [
 module.directive('console', [ 'logService', function (logService) {
   return {
     restrict: 'EA',
-    template: '<div class="debugConsole" style="overflow-y: scroll; background: #888; color: #eee; padding: 5px;"><b>Debugging Console</b><ul style="margin: 5px;" class="messages"><li class="item" style="list-style: none; border-bottom: 1px dashed silver; margin-bottom: 10px;" ng-repeat="msg in messages"><b>[{{msg.time | date:format}}][{{msg.publisher || "unkown" }}]</b> {{msg.text}}</li></ul></div>',
+    template: '<div class="debugConsole" style="overflow-y: scroll; padding: 5px; border: 1px dashed silver;"><ul style="margin: 5px;" class="messages"><li class="item" style="list-style: none; margin-bottom: 10px; margin: 0; padding: 0;" ng-repeat="msg in messages"><b>[{{msg.time | date:format}}][{{msg.publisher || "unkown" }}]</b> {{msg.text}}</li></ul></div>',
     replace: true,
     link: function (scope, element, attrs, ctrl) {
       // bind the model of attrs 'messsages'
