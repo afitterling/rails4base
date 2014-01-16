@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-init="signin=true">
     <div class="col-lg-6 col-offset-3">
 
         <div ng-show="userLoggedIn">
@@ -6,7 +6,19 @@
             <button class="btn">logout</button>
         </div>
 
-        <form name="SignInForm" ng-controller="SessionCtrl" class="margin-base-vertical" ng-submit="login()" novalidate ng-show="!userLoggedIn">
+        <div class="panel panel-info" ng-show="signin" ng-click="signin=!signin">
+            <div class="panel-body">
+                <span class="text-info">You don't have an account - sign up?</span>
+            </div>
+        </div>
+
+        <div class="panel panel-info" ng-show="!signin" ng-click="signin=!signin">
+            <div class="panel-body">
+                <span class="text-info">Login form.</span>
+            </div>
+        </div>
+
+        <form name="SignInForm" ng-controller="SessionCtrl" class="margin-base-vertical" ng-submit="login()" novalidate ng-show="!userLoggedIn && signin">
             <h3 class="margin-base-vertical">Sign In Form</h3>
 
             <div class="panel panel-danger" ng-show="failed">
