@@ -1,7 +1,7 @@
 class AngularTemplatesController < ApplicationController
 
   def show
-    render "#{params[:directive_name]}", :layout => false
+    render "angular_partials/#{params[:template_class]}/#{params[:template_name]}", :layout => false
   end
 
 end

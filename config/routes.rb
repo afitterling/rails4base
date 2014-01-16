@@ -7,6 +7,6 @@ App::Application.routes.draw do
   get '/' => 'pages#index'
 
   # angular: template controller for directives (see directives)
-  get "/angular/:directive_name" => "angular_templates#show"
+  get "/angular/:template_class/:template_name" => "angular_templates#show"
 
 end
