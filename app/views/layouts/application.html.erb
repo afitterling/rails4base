@@ -21,6 +21,10 @@
 </head>
 <body>
 
+<% if Rails.env.development? %>
+    {{40+4}}
+<% end %>
+
 <%= yield %>
 
 </body>
