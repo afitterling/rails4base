@@ -1,5 +1,5 @@
 angular.module('sessionService', [])
-  .factory('Session', function ($location, $http, $q) {
+  .factory('Session', ['$location','$http','$q', function ($location, $http, $q) {
 
     var service = {
 
@@ -64,4 +64,4 @@ angular.module('sessionService', [])
     };
 
     return service;
-  });
+  }]);
