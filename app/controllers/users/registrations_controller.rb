@@ -8,10 +8,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource
 
     resource = User.create(filtered_params)
-    resource.genPassword # auto gen password
+    #resource.genPassword # auto gen password
+    password = ('0'..'z').to_a.shuffle.first(8).join
+    resource.password = password
 
     if resource.save
       sign_up(resource_name, resource)
+      UserMailer.sign_up_confirmation_mail(resource, password).deliver
       render json: { success: true, user: resource}, status: 200
     else
       # send 406 - resource not acceptable due to validation issues

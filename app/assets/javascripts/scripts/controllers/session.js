@@ -13,7 +13,7 @@ app.controller('SessionCtrl',
 
       // gets called upon sign in click
       $scope.login = function () {
-
+        $scope.clicked = true;
         Session.login($scope.email, $scope.password, function (data, status) {
 
           // success
@@ -35,6 +35,7 @@ app.controller('SessionCtrl',
 
       // gets called upon sign up try
       $scope.signup = function(){
+        $scope.clicked = true;
         Session.speedReg($scope.email, function(){
           // success!
           $rootScope.currentUser = Session.currentUser;
