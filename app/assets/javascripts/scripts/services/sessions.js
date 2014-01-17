@@ -29,6 +29,16 @@ angular.module('sessionService', [])
         });
       },
 
+      speedReg: function(email, successCallback, errorCallback){
+        $http.post('/users/sign_up', {user: {email: email} })
+          .success(function(data, status){
+            successCallback(data, status);
+          })
+          .error(function(data, status){
+            errorCallback(data, status);
+          })
+      },
+
       register: function (email, password, confirm_password) {
         return $http.post('/users/sign_up', {user: {email: email, password: password, password_confirmation: confirm_password} })
           .then(function (response) {
