@@ -1,6 +1,6 @@
 App::Application.routes.draw do
 
-  #devise_for :users
+  devise_for :users, skip: :all
   devise_scope :user do
     post "users/sign_in" => "users/sessions#create"
     get "users/logout" => "users/sessions#destroy"
