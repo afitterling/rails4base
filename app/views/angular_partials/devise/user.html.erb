@@ -2,7 +2,8 @@
     <div class="col-lg-6 col-offset-3">
 
         <div ng-show="userLoggedIn" ng-controller="SessionCtrl">
-            <p>{{currentUser.email}}: You are logged in <button class="btn" ng-click="logout()">logout</button></p>
+            <p><a>User: {{currentUser.email}}</a></p>
+            <button class="btn btn-default" ng-click="logout()">logout</button>
         </div>
 
         <div class="panel panel-info" ng-show="signin" ng-hide="userLoggedIn" ng-click="signin=!signin">
