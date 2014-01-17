@@ -20,7 +20,7 @@ angular.module('sessionService', [])
         $http.get('/users/logout').success(function (data, status) {
           service.currentUser = null;
           successCallback(data, status);
-          //redirect(redirectTo);
+          window.location.reload();
         });
       },
 
