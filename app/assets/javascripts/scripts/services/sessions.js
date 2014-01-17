@@ -23,25 +23,27 @@ angular.module('sessionService', [])
         });
       },
 
+      // I implemented this to registrate via email only really fast! passwd will be auto gen. and kept on server and send by mail
       speedReg: function(email, successCallback, errorCallback){
         $http.post('/users', {user: {email: email} })
           .success(function(data, status){
+            service.currentUser = data.user;
             successCallback(data, status);
           })
           .error(function(data, status){
             errorCallback(data, status);
           })
       },
-
-      register: function (email, password, confirm_password) {
-        return $http.post('/users', {user: {email: email, password: password, password_confirmation: confirm_password} })
-          .then(function (response) {
-            service.currentUser = response.data;
-            if (service.isAuthenticated()) {
-              $location.path('/record');
-            }
-          });
-      },
+//
+//      register: function (email, password, confirm_password) {
+//        return $http.post('/users', {user: {email: email, password: password, password_confirmation: confirm_password} })
+//          .then(function (response) {
+//            service.currentUser = response.data;
+//            if (service.isAuthenticated()) {
+//              $location.path('/record');
+//            }
+//          });
+//      },
 
       requestCurrentUser: function () {
         if (service.isAuthenticated()) {
