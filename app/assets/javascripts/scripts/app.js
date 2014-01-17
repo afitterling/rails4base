@@ -30,15 +30,12 @@ app.run(['$rootScope', '$http', 'logService','Session', function ($rootScope, $h
   // regular expressions needed for validations
   $rootScope.EMAIL_REGEXP = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
 
-  if (Session.isAuthenticated()) {
-    $rootScope.user = Session.currentUser;
-  }
-
-//  $http.get('configs/validations').success(function (data) {
-//    $rootScope.validations = data;
-//    $rootScope.appLogger.log('validations successfully loaded', origin);
-//    $rootScope.appLogger.log($scope.validations, origin);
-//  });
+  $rootScope.user = Session.requestCurrentUser(function(data, status){
+    if (Session.isAuthenticated()){
+      $rootScope.currentUser = Session.currentUser;
+      $rootScope.userLoggedIn = Session.isAuthenticated();
+    };
+  });
 
 }]);
 
