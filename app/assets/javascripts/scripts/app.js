@@ -23,14 +23,16 @@ app.config(['$httpProvider', function (provider) {
 
 
 // init some stuff
-app.run(['$rootScope', '$http', 'logService', function ($rootScope, $http, logService) {
+app.run(['$rootScope', '$http', 'logService','Session', function ($rootScope, $http, logService, Session) {
 
   $rootScope.logger = logService;
 
   // regular expressions needed for validations
   $rootScope.EMAIL_REGEXP = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
 
-
+  if (Session.isAuthenticated()) {
+    $rootScope.user = Session.currentUser;
+  }
 
 //  $http.get('configs/validations').success(function (data) {
 //    $rootScope.validations = data;

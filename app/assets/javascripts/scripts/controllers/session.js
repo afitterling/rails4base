@@ -7,6 +7,7 @@ app.controller('SessionCtrl',
     function ($scope, $rootScope, $resource, $http, $timeout, Session) {
 
       var origin = 'SessionCtrl';
+      var timeout = 9000;
 
       $scope.logger.log('Hello!', origin);
 
@@ -17,7 +18,7 @@ app.controller('SessionCtrl',
 
           // success
           $rootScope.currentUser = Session.currentUser;
-          $rootScope.userLoggedIn = true;
+          $rootScope.userLoggedIn = true; // @TODO is authenticated!!!
 
         }, function (data, status) {
 
@@ -27,7 +28,7 @@ app.controller('SessionCtrl',
           $timeout(function () {
             $scope.failed = false;
             $scope.retry = true;
-          }, 4000);
+          }, timeout);
 
         });
       };
@@ -36,8 +37,17 @@ app.controller('SessionCtrl',
       $scope.signup = function(){
         console.log('got called');
         Session.speedReg($scope.email, function(){
-
-        }, function(){
+          // success!
+          $rootScope.currentUser = Session.currentUser;
+          $rootScope.userLoggedIn = true; // @TODO is authenticated!!!
+        }, function(data, status){
+          // error
+          $scope.failed = true;
+          $scope.errors = data.errors
+          $timeout(function () {
+            $scope.failed = false;
+            $scope.retry = true;
+          }, timeout);
 
         });
       };

@@ -2,19 +2,19 @@
     <div class="col-lg-6 col-offset-3">
 
         <div ng-show="userLoggedIn">
-            {{currentUser | json}}
-            <button class="btn">logout</button>
+            <p>{{currentUser.email}}: You are logged in <button class="btn">logout</button></p>
+
         </div>
 
-        <div class="panel panel-info" ng-show="signin" ng-click="signin=!signin">
+        <div class="panel panel-info" ng-show="signin" ng-hide="userLoggedIn" ng-click="signin=!signin">
             <div class="panel-body">
-                <span class="text-primary">You don't have an account - sign up?</span>
+                <span class="text-primary">You don't have an account? Sign up - click here!</span>
             </div>
         </div>
 
-        <div class="panel panel-info" ng-show="!signin" ng-click="signin=!signin">
+        <div class="panel panel-info" ng-show="!signin && !userLoggedIn" ng-click="signin=!signin">
             <div class="panel-body">
-                <span class="text-primary">Login form.</span>
+                <span class="text-primary"><span class="glyphicon glyphicon-arrow-left"></span> If you wish to login and you know your credentials, click here.</span>
             </div>
         </div>
 
@@ -23,13 +23,13 @@
 
             <div class="panel panel-danger" ng-show="failed">
                 <div class="panel-body">
-                    <span class="text-danger">Server says: Login failed! Wait a few seconds for retry ...</span>
+                    <span class="text-danger">Server says: Login failed! Wait a few seconds for retry ... <img src="/icons/ajax-loader.gif" /></span>
                 </div>
             </div>
 
             <div class="panel panel-warning" ng-show="retry && !failed">
                 <div class="panel-body">
-                    <span class="text-warning">You probably misspelled your credentials? Correct and try again ...</span>
+                    <span class="text-primary"><span class="glyphicon glyphicon-ok-circle"></span> You probably misspelled your credentials? Correct and try again ...</span>
                 </div>
             </div>
 
@@ -77,17 +77,15 @@
         <form name="SignUpForm" ng-controller="SessionCtrl" class="margin-base-vertical" ng-submit="signup()" novalidate ng-show="!userLoggedIn && !signin">
             <h3 class="margin-base-vertical">Sign Up Form</h3>
 
-            <p class="text-info" ng-click="">You'll get logged in automatically upon successfully registration. Password gets mailed to you.</p>
-
             <div class="panel panel-danger" ng-show="failed">
                 <div class="panel-body">
-                    <span class="text-danger">Server says: Login failed! Wait a few seconds for retry ...</span>
+                    <span class="text-danger"><b>Ups, failed! Reason: {{errors[0]}}. Please, wait a few seconds ... <img src="/icons/ajax-loader.gif" /></b></span>
                 </div>
             </div>
 
             <div class="panel panel-warning" ng-show="retry && !failed">
                 <div class="panel-body">
-                    <span class="text-warning">You probably misspelled your credentials? Correct and try again ...</span>
+                    <span class="text-primary"><span class="glyphicon glyphicon-ok-circle"></span> You can now retry registration or contact <b>support!</b></span>
                 </div>
             </div>
 
@@ -123,10 +121,12 @@
             <!--</p>-->
 
             <p class="text-center">
-                <button ng-hide="failed" style="" type="submit" ng-disabled="!SignUpForm.$valid || signUpFailed" class="btn btn-success btn-large">
+                <button ng-hide="" style="" type="submit" ng-disabled="!SignUpForm.$valid || failed" class="btn btn-success btn-large">
                     <span>Sign Up!</span>
                 </button>
             </p>
+
+            <p class="text-info" ng-click="">You'll get logged in automatically upon successfully registration. Password gets mailed to you.</p>
 
         </form>
 
