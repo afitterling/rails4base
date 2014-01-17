@@ -63,6 +63,8 @@
                        ng-pattern="" placeholder="" ng-minlength="8" required=""/>
             </p>
 
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+
             <p class="text-center">
                 <button ng-hide="" style="" type="submit" ng-disabled="!SignInForm.$valid || failed || clicked" class="btn btn-success btn-large">
                     <span ng-hide="">Sign in! <img ng-show="clicked" src="icons/ajax-loader_clock.gif" /></span>
@@ -118,6 +120,8 @@
                 <!--<input type="password" class="form-control input-large" ng-model="password" name="password"-->
                        <!--ng-pattern="" placeholder="" ng-minlength="8" required=""/>-->
             <!--</p>-->
+
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
 
             <p class="text-center">
                 <button ng-hide="" style="" type="submit" ng-disabled="!SignUpForm.$valid || failed || clicked" class="btn btn-success btn-large">
