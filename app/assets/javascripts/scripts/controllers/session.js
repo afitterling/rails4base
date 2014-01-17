@@ -34,7 +34,12 @@ app.controller('SessionCtrl',
 
       // gets called upon sign up try
       $scope.signup = function(){
+        console.log('got called');
+        Session.speedReg($scope.email, function(){
 
+        }, function(){
+
+        });
       };
 
     }]);

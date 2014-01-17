@@ -1,12 +1,6 @@
 angular.module('sessionService', [])
   .factory('Session', function ($location, $http, $q) {
-    // Redirect to the given url (defaults to '/')
-    function redirect(url) {
-      url = url || '/';
-      $location.path(url);
-    }
 
-    var interceptor = {};
     var service = {
 
       login: function (email, password, successCallback, errorCallback) {
@@ -30,7 +24,7 @@ angular.module('sessionService', [])
       },
 
       speedReg: function(email, successCallback, errorCallback){
-        $http.post('/users/sign_up', {user: {email: email} })
+        $http.post('/users', {user: {email: email} })
           .success(function(data, status){
             successCallback(data, status);
           })
@@ -40,7 +34,7 @@ angular.module('sessionService', [])
       },
 
       register: function (email, password, confirm_password) {
-        return $http.post('/users/sign_up', {user: {email: email, password: password, password_confirmation: confirm_password} })
+        return $http.post('/users', {user: {email: email, password: password, password_confirmation: confirm_password} })
           .then(function (response) {
             service.currentUser = response.data;
             if (service.isAuthenticated()) {
