@@ -26,10 +26,11 @@ app.controller('SessionCtrl',
           // error
           $scope.logger.log(data, origin);
           $scope.failed = true;
+          $scope.clicked = false;
           $timeout(function () {
             $scope.failed = false;
             $scope.retry = true;
-            $scope.clicked = false;
+
           }, timeout);
 
         });
@@ -48,10 +49,10 @@ app.controller('SessionCtrl',
           // error
           $scope.failed = true;
           $scope.errors = data.errors
+          $scope.clicked = false;
           $timeout(function () {
             $scope.failed = false;
             $scope.retry = true;
-            $scope.clicked = false;
           }, timeout);
 
         });

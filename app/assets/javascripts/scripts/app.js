@@ -16,7 +16,8 @@ app.config(['$httpProvider', function (provider) {
   // headers
 
   // steal the CSRF-Token on client side from rails server side rendered pages via jQuery
-  provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+  var authToken = $("meta[name=\"csrf-token\"]").attr("content");
+  provider.defaults.headers.common["X-CSRF-TOKEN"] = authToken;
 
   // register my interceptors
   //provider.interceptors.push('authReqInterceptor'); // authentication
