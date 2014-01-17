@@ -65,7 +65,7 @@
 
             <p class="text-center">
                 <button ng-hide="" style="" type="submit" ng-disabled="!SignInForm.$valid || failed || clicked" class="btn btn-success btn-large">
-                    <span>Sign in!</span>
+                    <span ng-hide="">Sign in! <img ng-show="clicked" src="icons/ajax-loader_clock.gif" /></span>
                 </button>
             </p>
 
@@ -121,7 +121,7 @@
 
             <p class="text-center">
                 <button ng-hide="" style="" type="submit" ng-disabled="!SignUpForm.$valid || failed || clicked" class="btn btn-success btn-large">
-                    <span>Sign Up!</span>
+                    <span ng-hide="">Sign Up!<img ng-show="clicked" src="icons/ajax-loader_clock.gif" /></span>
                 </button>
             </p>
 
