@@ -8,13 +8,13 @@
 
         <div class="panel panel-info" ng-show="signin" ng-click="signin=!signin">
             <div class="panel-body">
-                <span class="text-info">You don't have an account - sign up?</span>
+                <span class="text-primary">You don't have an account - sign up?</span>
             </div>
         </div>
 
         <div class="panel panel-info" ng-show="!signin" ng-click="signin=!signin">
             <div class="panel-body">
-                <span class="text-info">Login form.</span>
+                <span class="text-primary">Login form.</span>
             </div>
         </div>
 
@@ -67,6 +67,64 @@
             <p class="text-center">
                 <button ng-hide="failed" style="" type="submit" ng-disabled="!SignInForm.$valid || failed" class="btn btn-success btn-large">
                     <span>Sign in!</span>
+                </button>
+            </p>
+
+            <p><a class="text-info" ng-click="">I wish to reset my password!</a></p>
+
+        </form>
+
+        <form name="SignUpForm" ng-controller="SessionCtrl" class="margin-base-vertical" ng-submit="signup()" novalidate ng-show="!userLoggedIn && !signin">
+            <h3 class="margin-base-vertical">Sign Up Form</h3>
+
+            <p class="text-info" ng-click="">You'll get logged in automatically upon successfully registration. Password gets mailed to you.</p>
+
+            <div class="panel panel-danger" ng-show="failed">
+                <div class="panel-body">
+                    <span class="text-danger">Server says: Login failed! Wait a few seconds for retry ...</span>
+                </div>
+            </div>
+
+            <div class="panel panel-warning" ng-show="retry && !failed">
+                <div class="panel-body">
+                    <span class="text-warning">You probably misspelled your credentials? Correct and try again ...</span>
+                </div>
+            </div>
+
+            <label for="email">Your Email address</label>
+
+            <p ng-show="SignUpForm.email.$error.required"><span class="text-warning">Fill in your email address!</span>
+            </p>
+
+            <p ng-show="SignUpForm.email.$error.pattern">
+                <span class="text-danger">Needs valid pattern such as e.g. name@domain.com!</span></p>
+
+            <p ng-show="SignUpForm.email.$valid"><span class="text-success">This is a valid pattern for an email.</span>
+            </p>
+
+            <p class="input-group" ng-class="{ 'has-error': SignUpForm.email.$error.pattern || SignUpForm.email.$error.required }">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                <input id="email" type="email" class="form-control input-large" ng-model="email" name="email" ng-pattern="EMAIL_REGEXP" placeholder="" required/>
+            </p>
+
+            <!--<label>Your Password</label>-->
+
+            <!--<p ng-show="SignUpForm.password.$error.required"><span class="text-warning">Type password!</span></p>-->
+
+            <!--<p ng-show="SignUpForm.password.$error.minlength"><span class="text-danger">Too short!</span></p>-->
+
+            <!--<p ng-show="SignUpForm.password.$valid">-->
+                <!--<span class="text-success">Hit enter key or click submit if you think password is complete.</span></p>-->
+
+            <!--<p class="input-group" ng-class="{ 'has-error': SignUpForm.password.$error.required || SignUpForm.password.$error.minlength }">-->
+                <!--<span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>-->
+                <!--<input type="password" class="form-control input-large" ng-model="password" name="password"-->
+                       <!--ng-pattern="" placeholder="" ng-minlength="8" required=""/>-->
+            <!--</p>-->
+
+            <p class="text-center">
+                <button ng-hide="failed" style="" type="submit" ng-disabled="!SignUpForm.$valid || signUpFailed" class="btn btn-success btn-large">
+                    <span>Sign Up!</span>
                 </button>
             </p>
 

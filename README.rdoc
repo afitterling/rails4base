@@ -1,28 +1,16 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A (j)ruby app clinging rails and angularJS basic functionalities together.
 
-Things you may want to cover:
+It provides:
 
-* Ruby version
+* the structure of modern single page driven web apps, using promises to hide latencies and to increase implementation quality of user interactions.
 
-* System dependencies
+* client site routing with AngularJS using rails as backend
 
-* Configuration
+* user registration/authentication using angular and devise
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* twitter bootstrap 3+ integrated
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+

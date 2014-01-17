@@ -10,7 +10,7 @@ app.controller('SessionCtrl',
 
       $scope.logger.log('Hello!', origin);
 
-      // gets called upon signin click
+      // gets called upon sign in click
       $scope.login = function () {
 
         Session.login($scope.email, $scope.password, function (data, status) {
@@ -30,6 +30,11 @@ app.controller('SessionCtrl',
           }, 4000);
 
         });
+      };
+
+      // gets called upon sign up try
+      $scope.signup = function(){
+
       };
 
     }]);
