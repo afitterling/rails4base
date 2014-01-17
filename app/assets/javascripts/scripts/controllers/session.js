@@ -18,7 +18,7 @@ app.controller('SessionCtrl',
 
           // success
           $rootScope.currentUser = Session.currentUser;
-          $rootScope.userLoggedIn = true; // @TODO is authenticated!!!
+          $rootScope.userLoggedIn = Session.isAuthenticated();
 
         }, function (data, status) {
 
@@ -35,11 +35,10 @@ app.controller('SessionCtrl',
 
       // gets called upon sign up try
       $scope.signup = function(){
-        console.log('got called');
         Session.speedReg($scope.email, function(){
           // success!
           $rootScope.currentUser = Session.currentUser;
-          $rootScope.userLoggedIn = true; // @TODO is authenticated!!!
+          $rootScope.userLoggedIn = Session.isAuthenticated();
         }, function(data, status){
           // error
           $scope.failed = true;
@@ -49,6 +48,14 @@ app.controller('SessionCtrl',
             $scope.retry = true;
           }, timeout);
 
+        });
+      };
+
+      $scope.logout = function(){
+        Session.logout(function(){
+          // success
+          $rootScope.currentUser = Session.currentUser;
+          $rootScope.userLoggedIn = Session.isAuthenticated();
         });
       };
 

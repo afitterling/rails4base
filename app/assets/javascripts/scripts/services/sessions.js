@@ -16,10 +16,11 @@ angular.module('sessionService', [])
         return;
       },
 
-      logout: function (redirectTo) {
-        $http.post('/logout').then(function () {
+      logout: function (successCallback, redirectTo) {
+        $http.post('/users/logout').success(function (data, status) {
           service.currentUser = null;
-          redirect(redirectTo);
+          successCallback(data, status);
+          //redirect(redirectTo);
         });
       },
 
@@ -45,13 +46,18 @@ angular.module('sessionService', [])
 //          });
 //      },
 
-      requestCurrentUser: function (successCallback) {
+      requestCurrentUser: function (successCallback, errorCallback) {
 
-        $http.get('/users/restore').success(function (data, status) {
-          service.currentUser = data.user;
-
-          successCallback(data, status);
-        }).error();
+        $http.get('/users/restore')
+          .success(function (data, status) {
+            // success
+            service.currentUser = data.user;
+            successCallback(data, status);
+          }).error(function (data, status) {
+            // error
+            //errorCallback(data, status);
+          }
+        );
         return;
       },
 

@@ -11,9 +11,11 @@ var app = angular.module('AngularApp', [
   'sessionService'
 ]);
 
-// steal the CSRF-Token
 app.config(['$httpProvider', function (provider) {
+
   // headers
+
+  // steal the CSRF-Token on client side from rails server side rendered pages via jQuery :)
   provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
 
   // register my interceptors
@@ -29,6 +31,8 @@ app.run(['$rootScope', '$http', 'logService','Session', function ($rootScope, $h
 
   // regular expressions needed for validations
   $rootScope.EMAIL_REGEXP = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+
+  // restore session if user already logged in
 
   $rootScope.user = Session.requestCurrentUser(function(data, status){
     if (Session.isAuthenticated()){

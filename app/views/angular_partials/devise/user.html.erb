@@ -1,9 +1,8 @@
 <div class="row" ng-init="signin=true">
     <div class="col-lg-6 col-offset-3">
 
-        <div ng-show="userLoggedIn">
-            <p>{{currentUser.email}}: You are logged in <button class="btn">logout</button></p>
-
+        <div ng-show="userLoggedIn" ng-controller="SessionCtrl">
+            <p>{{currentUser.email}}: You are logged in <button class="btn" ng-click="logout()">logout</button></p>
         </div>
 
         <div class="panel panel-info" ng-show="signin" ng-hide="userLoggedIn" ng-click="signin=!signin">
