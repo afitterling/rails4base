@@ -17,7 +17,7 @@ angular.module('sessionService', [])
       },
 
       logout: function (successCallback, redirectTo) {
-        $http.post('/users/logout').success(function (data, status) {
+        $http.get('/users/logout').success(function (data, status) {
           service.currentUser = null;
           successCallback(data, status);
           //redirect(redirectTo);

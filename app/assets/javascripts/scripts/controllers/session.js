@@ -19,6 +19,7 @@ app.controller('SessionCtrl',
           // success
           $rootScope.currentUser = Session.currentUser;
           $rootScope.userLoggedIn = Session.isAuthenticated();
+          $scope.clicked = false;
 
         }, function (data, status) {
 
@@ -28,6 +29,7 @@ app.controller('SessionCtrl',
           $timeout(function () {
             $scope.failed = false;
             $scope.retry = true;
+            $scope.clicked = false;
           }, timeout);
 
         });
@@ -40,6 +42,8 @@ app.controller('SessionCtrl',
           // success!
           $rootScope.currentUser = Session.currentUser;
           $rootScope.userLoggedIn = Session.isAuthenticated();
+          $scope.clicked = false;
+
         }, function(data, status){
           // error
           $scope.failed = true;
@@ -47,6 +51,7 @@ app.controller('SessionCtrl',
           $timeout(function () {
             $scope.failed = false;
             $scope.retry = true;
+            $scope.clicked = false;
           }, timeout);
 
         });

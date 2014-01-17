@@ -15,7 +15,7 @@ app.config(['$httpProvider', function (provider) {
 
   // headers
 
-  // steal the CSRF-Token on client side from rails server side rendered pages via jQuery :)
+  // steal the CSRF-Token on client side from rails server side rendered pages via jQuery
   provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
 
   // register my interceptors
@@ -23,9 +23,8 @@ app.config(['$httpProvider', function (provider) {
 
 }]);
 
-
 // init some stuff
-app.run(['$rootScope', '$http', 'logService','Session', function ($rootScope, $http, logService, Session) {
+app.run(['$rootScope', '$http', 'logService', 'Session', function ($rootScope, $http, logService, Session) {
 
   $rootScope.logger = logService;
 
@@ -34,11 +33,11 @@ app.run(['$rootScope', '$http', 'logService','Session', function ($rootScope, $h
 
   // restore session if user already logged in
 
-  $rootScope.user = Session.requestCurrentUser(function(data, status){
-    if (Session.isAuthenticated()){
+  $rootScope.user = Session.requestCurrentUser(function (data, status) {
+    if (Session.isAuthenticated()) {
       $rootScope.currentUser = Session.currentUser;
       $rootScope.userLoggedIn = Session.isAuthenticated();
-    };
+    }
   });
 
 }]);
