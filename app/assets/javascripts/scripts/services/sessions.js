@@ -31,6 +31,7 @@ angular.module('sessionService', [])
           .success(function (data, status) {
             service.currentUser = data.user;
             successCallback(data, status);
+            $location.path('/profile')
           })
           .error(function (data, status) {
             errorCallback(data, status);
