@@ -9,9 +9,9 @@ class AngularTemplatesController < ApplicationController
     if restricted_pages.include?(params[:template_name]) && params[:template_class]=='pages' && !user_signed_in?
       render text: :none, status: 401
     else
-      template_file = 'angular_partials/#{params[:template_class]}/#{params[:template_name]}'
-      if File.exist? template_file
-        render 'angular_partials/#{params[:template_class]}/#{params[:template_name]}', :layout => false
+      template_file = "#{Rails.root}/app/views/angular_partials/#{params[:template_class]}/#{params[:template_name]}"
+      if !Dir.glob("#{template_file}.*").empty?
+        render template_file, :layout => false
       else
         render text: :none, status: 404
       end
