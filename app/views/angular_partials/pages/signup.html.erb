@@ -1,0 +1,44 @@
+<div class="row" ng-init="signin=true">
+    <div class="col-lg-6 col-offset-3">
+
+        <form name="SignUpForm" ng-controller="SessionCtrl" class="margin-base-vertical" ng-submit="signup()" novalidate>
+            <h3 class="margin-base-vertical">Sign Up Form</h3>
+
+            <div class="panel panel-danger" ng-show="failed">
+                <div class="panel-body">
+                    <span class="text-danger"><b>Ups, failed! Reason: {{errors[0]}}. Please, wait a few seconds ... <img src="/icons/ajax-loader.gif" /></b></span>
+                </div>
+            </div>
+
+            <div class="panel panel-warning" ng-show="retry && !failed">
+                <div class="panel-body">
+                    <span class="text-primary"><span class="glyphicon glyphicon-ok-circle"></span> You can now retry registration or contact <b>support!</b></span>
+                </div>
+            </div>
+
+            <label for="email">Your Email address</label>
+
+            <p ng-show="SignUpForm.email.$error.required"><span class="text-warning">Fill in your email address!</span>
+            </p>
+
+            <p ng-show="SignUpForm.email.$error.pattern">
+                <span class="text-danger">Needs valid pattern such as e.g. name@domain.com!</span></p>
+
+            <p ng-show="SignUpForm.email.$valid"><span class="text-success">This is a valid pattern for an email.</span>
+            </p>
+
+            <p class="input-group" ng-class="{ 'has-error': SignUpForm.email.$error.pattern || SignUpForm.email.$error.required }">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                <input id="email" type="email" class="form-control input-large" ng-model="email" name="email" ng-pattern="EMAIL_REGEXP" placeholder="" required/>
+            </p>
+
+            <p class="text-center">
+                <button ng-hide="" style="" type="submit" ng-disabled="!SignUpForm.$valid || failed || clicked" class="btn btn-success btn-large">
+                    <span ng-hide="">Sign Up!<img ng-show="clicked" src="icons/ajax-loader_clock.gif" /></span>
+                </button>
+            </p>
+
+        </form>
+
+    </div>
+</div>
