@@ -15,7 +15,7 @@ var app = angular.module('AngularApp', [
 app.config(['$routeProvider','$httpProvider','$locationProvider', function ($routeProvider, $httpProvider, $locationProvider) {
 
   // activate push state html5
-  $locationProvider.html5Mode(true);
+  $locationProvider.html5Mode(true).hashPrefix('!');
 
   // headers
 
