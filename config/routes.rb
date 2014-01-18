@@ -8,9 +8,11 @@ App::Application.routes.draw do
     get "users/restore" => "users/sessions#show_current_user"
   end
 
+  # route to angular app
   get "/" => "pages#index"
+  get "/pages/" => "pages#index"
 
-  # angular: template controller for directives (see directives)
+  # angular template controller for partials/directives (see directives)
   get "/angular/:template_class/:template_name" => "angular_templates#show"
 
 end
