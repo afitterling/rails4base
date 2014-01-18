@@ -1,17 +1,19 @@
 'use strict';
 
-var app = angular.module('ctrls.session', []);
+var app = angular.module('ctrls.account', []);
 
-app.controller('SessionCtrl',
+app.controller('AccountCtrl',
   ['$scope', '$rootScope', '$resource', '$http', '$timeout', 'Session',
     function ($scope, $rootScope, $resource, $http, $timeout, Session) {
 
-      var origin = 'SessionCtrl';
+      var origin = 'AccountCtrl';
+
+      // safety time out for failed action before retry
       var timeout = 9000;
 
-      $scope.logger.log('Hello!', origin);
+//      $scope.logger.log('Hello!', origin);
 
-      // gets called upon sign in click
+      // gets called upon sign in
       $scope.login = function () {
         $scope.clicked = true;
         Session.login($scope.email, $scope.password, function (data, status) {
@@ -36,7 +38,7 @@ app.controller('SessionCtrl',
         });
       };
 
-      // gets called upon sign up try
+      // gets called upon sign up attempt
       $scope.signup = function(){
         $scope.clicked = true;
         Session.speedReg($scope.email, function(){
@@ -58,6 +60,7 @@ app.controller('SessionCtrl',
         });
       };
 
+      // logout
       $scope.logout = function(){
         Session.logout(function(){
           // success

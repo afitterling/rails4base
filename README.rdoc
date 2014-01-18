@@ -8,21 +8,26 @@ It provides:
 
 * client site routing with AngularJS using rails as backend
 
-* user registration/authentication using angular and devise
+* user registration/authentication using angular and devise with secure client and server side routing
+
+* server side regexp mathings in routes.rb to secure angular partials/pages client side!
 
 * twitter bootstrap 3+ integrated
 
 * scaleable, clusterable
 
+* in case of jruby: easy maintainable / installable (see torquebox)
+
 What follows:
 
 * torquebox features, such as message queues to connect be with client (real time!)
 
-* easy maintainable / installable (see torquebox)
 
 === Setup
 
 Use jruby:
+
+<tt>rvm use jruby</tt>
 
 for testing in console:
 
@@ -30,8 +35,8 @@ for testing in console:
 
 (do not include in Gemfile, use binary package for serverside instead: http://torquebox.org/)
 
-torquebox run
-torquebox deploy
+<tt>torquebox run</tt>
+<tt>torquebox deploy</tt>
 
 ==== production
 
@@ -40,32 +45,24 @@ torquebox deploy
 
 No name collisions with rails apps!!!! great!!!
 
-<tt>
-bundle
-RAILS_ENV=production rake db:migrate
-RAILS_ENV=production rake assets:precompile
-echo RAILS_RELATIVE_URL_ROOT='/app3' RAILS_ENV=production torquebox deploy --context-path='/app3'
-</tt>
+<tt>bundle</tt>
+<tt>RAILS_ENV=production rake db:migrate</tt>
+<tt>RAILS_ENV=production rake assets:precompile</tt>
+Setting RAILS_RELATIVE_URL_ROOT is necessary if deploying to context path:
+<tt>RAILS_RELATIVE_URL_ROOT='/subpath' RAILS_ENV=production torquebox deploy --context-path='/subpath'</tt>
 
-Nginx example config if deploying with context path:
 
-<tt>
-server {
+Nginx example config:
+
+<tt>server {
   listen 80;
   server_name app3.sp33c.de;
-  rewrite ^/app3(/.*)$ $1 last;
+  rewrite ^/subpath(/.*)$ $1 last; // if deploying with context path
   location / {
-    root /home/torquebox/rails4baseapp/public;
-    proxy_pass http://87.230.18.238:8080/app3/;
+    root /home/torquebox/railsapp/public;
+    proxy_pass http://87.230.18.238:8080/subpath/;
     proxy_set_header   X-Real-IP        $remote_addr;
     proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
     proxy_set_header   Host $http_host;
   }
-}
-</tt>
-
-
-
-
-
-
+}</tt>
