@@ -26,31 +26,32 @@ What follows:
 === Setup
 
 Use jruby:
-
 <tt>rvm use jruby</tt>
 
 for testing in console:
-
 <tt>gem install torquebox</tt>
 
 (do not include in Gemfile, use binary package for serverside instead: http://torquebox.org/)
-
 <tt>torquebox run</tt>
+
 <tt>torquebox deploy</tt>
 
 ==== production
 
 * Install binary package, just bundle.
+
 * Use Nginx or Apache  as reverse proxy (see Apache's mod cluster: http://www.headlondon.com/our-thoughts/technology/posts/installing-torquebox-application-server-on-debian).
 
 No name collisions with rails apps!!!! great!!!
 
 <tt>bundle</tt>
+
 <tt>RAILS_ENV=production rake db:migrate</tt>
+
 <tt>RAILS_ENV=production rake assets:precompile</tt>
+
 Setting RAILS_RELATIVE_URL_ROOT is necessary if deploying to context path:
 <tt>RAILS_RELATIVE_URL_ROOT='/subpath' RAILS_ENV=production torquebox deploy --context-path='/subpath'</tt>
-
 
 Nginx example config:
 
