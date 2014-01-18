@@ -31,7 +31,11 @@ app.config(['$routeProvider','$httpProvider','$locationProvider', function ($rou
   $routeProvider
     .when('/:page', {
       templateUrl: function (params) {
-        return '/angular/pages/home'; // + params.page;
+        if (params.page){
+          return '/angular/pages/' + params.page;
+        } else {
+          return '/angular/pages/home';
+        };
       }//,
 //      controller: 'RoutingCtrl'//,
 //      resolve: {
