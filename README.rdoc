@@ -4,7 +4,7 @@ An app clinging rails4 and angularJS basic functionalities together.
 
 It provides:
 
-* the structure of modern single page driven web apps, using promises client side to hide latencies and to increase implementation quality of user interactions.
+* the structure of modern single page driven web apps, using promises client side to hide latencies and to increase implementation quality for advanced user / micro interactions
 
 * client site routing with AngularJS using rails as backend
 
@@ -30,8 +30,8 @@ Use jruby:
 
 for testing in console:
 <tt>gem install torquebox</tt>
+(Do not include in Gemfile. Server side use binary package instead: http://torquebox.org/)
 
-(do not include in Gemfile, use binary package for serverside instead: http://torquebox.org/)
 <tt>torquebox run</tt>
 
 <tt>torquebox deploy</tt>
