@@ -9,6 +9,7 @@ var app = angular.module('AngularApp', [
   // apps modules
   'interceptors',
   'ctrls.session',
+  'ctrls.base',
   'sessionService'
 ]);
 
@@ -62,13 +63,15 @@ app.run(['$rootScope', '$http', 'logService', 'Session', function ($rootScope, $
   // regular expressions needed for validations
   $rootScope.EMAIL_REGEXP = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
 
-  // restore session if user already logged in
 
+  // restore session if user already logged in
   $rootScope.user = Session.requestCurrentUser(function (data, status) {
     if (Session.isAuthenticated()) {
       $rootScope.currentUser = Session.currentUser;
       $rootScope.userLoggedIn = Session.isAuthenticated();
     }
   });
+
+
 
 }]);
