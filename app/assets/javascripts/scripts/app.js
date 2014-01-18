@@ -25,7 +25,6 @@ app.config(['$provide', '$routeProvider', '$httpProvider', '$locationProvider', 
   var authToken = $("meta[name=\"csrf-token\"]").attr("content");
   $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken;
 
-  //@TODO
 //  $provide.factory('errorHttpInterceptor',
 //    function ($q, $location, ErrorService, $rootScope) {
 //      return function (promise) {
@@ -40,10 +39,10 @@ app.config(['$provide', '$routeProvider', '$httpProvider', '$locationProvider', 
 //          return $q.reject(response);
 //        });
 //      }
-//    };
+//    });
 //
 //  // register my interceptors
-  $httpProvider.interceptors.push('errorHttpInterceptor');
+//  $httpProvider.interceptors.push('errorHttpInterceptor');
 
   // routes
   $routeProvider
