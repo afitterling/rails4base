@@ -9,6 +9,7 @@ angular.module('sessionService', [])
             if (status === 200) {
               service.currentUser = data.user;
               successCallback(data, status);
+              $location.path('/profile')
             }
           }).error(function (data, status, headers, config) {
             errorCallback(data, status);
@@ -20,7 +21,7 @@ angular.module('sessionService', [])
         $http.get('/users/logout').success(function (data, status) {
           service.currentUser = null;
           successCallback(data, status);
-          window.location.reload();
+          window.location.href = '/home';
         });
       },
 
