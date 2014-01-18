@@ -6,10 +6,7 @@ angular.module('ctrls.base', [])
     ['$scope', '$rootScope', '$resource', '$http',
       function ($scope, $rootScope, $resource, $http) {
 
-//        var origin = 'SessionCtrl';
-//        $scope.logger.log('I am here!', origin);
-//        console.log('x');
-
+        // we receive this from HttpErrorInterceptor
         $scope.$on('event:loginRequired', function () {
           $location.path('/login');
         });

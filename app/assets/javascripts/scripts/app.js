@@ -10,11 +10,11 @@ var app = angular.module('AngularApp', [
   'interceptors',
   'ctrls.session',
   'ctrls.base',
-  'ctrls.routing',
+  //'ctrls.routing',
   'sessionService'
 ]);
 
-app.config(['$routeProvider','$httpProvider','$locationProvider', function ($routeProvider, $httpProvider, $locationProvider) {
+app.config(['$routeProvider', '$httpProvider', '$locationProvider', function ($routeProvider, $httpProvider, $locationProvider) {
 
   // activate push state html5
   $locationProvider.html5Mode(true).hashPrefix('!');
@@ -25,19 +25,36 @@ app.config(['$routeProvider','$httpProvider','$locationProvider', function ($rou
   var authToken = $("meta[name=\"csrf-token\"]").attr("content");
   $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken;
 
-  // register my interceptors
-  //provider.interceptors.push('authReqInterceptor'); // authentication
+  //@TODO
+//  var errorHttpInterceptor =
+//    function ($q, $location, ErrorService, $rootScope) {
+//      return function (promise) {
+//        return promise.then(function (response) {
+//          return response;
+//        }, function (response) {
+//          if (response.status === 401) {
+//            $rootScope.$broadcast('event:loginRequired');
+//          } else if (response.status >= 400 && response.status < 500) {
+//            // do something
+//          }
+//          return $q.reject(response);
+//        });
+//      }
+//    };
+//
+//  // register my interceptors
+//  $httpProvider.interceptors.push('errorHttpInterceptor');
 
   // routes
-
   $routeProvider
     .when('/:page', {
       templateUrl: function (params) {
-        if (params.page){
+        if (params.page) {
           return '/angular/pages/' + params.page;
         } else {
           return '/angular/pages/home';
-        };
+        }
+        ;
       },
       controller: 'RoutingCtrl'//,
 //      resolve: {
@@ -48,16 +65,10 @@ app.config(['$routeProvider','$httpProvider','$locationProvider', function ($rou
       redirectTo: '/'
     });
 
-
 }]);
 
-// init some stuff
+// init some stuff after bootstrap
 app.run(['$rootScope', '$http', 'logService', 'Session', function ($rootScope, $http, logService, Session) {
-
-//  $rootScope.restrictedPages = [
-//    '/profile',
-//    '/xyz'
-//  ];
 
   // patch method
   var defaults = $http.defaults.headers;
@@ -77,7 +88,6 @@ app.run(['$rootScope', '$http', 'logService', 'Session', function ($rootScope, $
       $rootScope.userLoggedIn = Session.isAuthenticated();
     }
   });
-
 
 
 }]);
