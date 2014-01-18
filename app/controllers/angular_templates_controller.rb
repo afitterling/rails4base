@@ -24,6 +24,8 @@ class AngularTemplatesController < ApplicationController
 
   private
 
+  # it's a bad trick here, since we can't have always params form routes we're building
+  # template path from url
     def partial_file
       # I had problems on jboss/torquebox when deploying with context url; this fix worked!
       # RAILS_RELATIVE_URL_ROOT='/app3' RAILS_ENV=production torquebox deploy --context-path='/app3'
