@@ -7,10 +7,8 @@ var app = angular.module('AngularApp', [
   // debugging
   'debug',
   // apps modules
-  'interceptors',
   'ctrls.session',
   'ctrls.base',
-  //'ctrls.routing',
   'sessionService'
 ]);
 
@@ -27,28 +25,28 @@ app.config(
       var authToken = $("meta[name=\"csrf-token\"]").attr("content");
       $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken;
 
+      // errorHttpInterceptor
 
-      var interceptor = ['$q', '$location', '$rootScope',
+      var errorHttpInterceptor = ['$q', '$location', '$rootScope',
         function ($q, $location, $rootScope) {
           return function (promise) {
             return promise.then(function (response) {
               return response;
             }, function (response) {
               if (response.status === 401) {
+                // send login required on 401
                 $rootScope.$broadcast('event:loginRequired');
               } else if (response.status >= 400 && response.status < 500) {
-                // @TODO
+                // @TODO failsafes
               }
               return $q.reject(response);
             });
           }
         }];
 
-      $httpProvider.responseInterceptors.push(interceptor);
-
       // register my interceptors
-      //$httpProvider.interceptors.push(errorHttpInterceptor);
-//      $httpProvider.interceptors.push('myHttpInterceptor');
+
+      $httpProvider.responseInterceptors.push(errorHttpInterceptor);
 
       // routes
       $routeProvider
@@ -72,7 +70,9 @@ app.config(
 
     }]);
 
-// init some stuff after bootstrap
+
+// init some stuff right after bootstraping angular
+
 app.run(['$rootScope', '$http', 'logService', 'Session', function ($rootScope, $http, logService, Session) {
 
   // patch method
@@ -83,11 +83,14 @@ app.run(['$rootScope', '$http', 'logService', 'Session', function ($rootScope, $
 
   $rootScope.logger = logService;
 
+
   // regular expressions needed for validations
+
   $rootScope.EMAIL_REGEXP = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
 
 
   // restore session if user already logged in
+
   $rootScope.user = Session.requestCurrentUser(function (data, status) {
     if (Session.isAuthenticated()) {
       $rootScope.currentUser = Session.currentUser;
