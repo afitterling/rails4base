@@ -6,13 +6,13 @@
 
             <div class="panel panel-danger" ng-show="failed">
                 <div class="panel-body">
-                    <span class="text-danger">Server says: Login failed! Wait a few seconds for retry ... <img src="/icons/ajax-loader.gif" /></span>
+                    <span class="text-danger"><b>Server says: Login failed! Wait a few seconds to be able to retry. <img src="/icons/ajax-loader.gif" /></b></span>
                 </div>
             </div>
 
             <div class="panel panel-warning" ng-show="retry && !failed">
                 <div class="panel-body">
-                    <span class="text-primary"><span class="glyphicon glyphicon-ok-circle"></span> You probably misspelled your credentials? Correct and try again ...</span>
+                    <span class="text-primary"><span class="glyphicon glyphicon-ok-circle"></span><b>You probably misspelled your credentials?</b></span>
                 </div>
             </div>
 
