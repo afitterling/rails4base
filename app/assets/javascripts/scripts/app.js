@@ -10,7 +10,7 @@ var app = angular.module('AngularApp', [
   'interceptors',
   'ctrls.session',
   'ctrls.base',
-  'ctrls.routing',
+  //'ctrls.routing',
   'sessionService'
 ]);
 
@@ -54,8 +54,8 @@ app.config(['$provide', '$routeProvider', '$httpProvider', '$locationProvider', 
           return '/angular/pages/home';
         }
         ;
-      },
-      controller: 'RoutingCtrl'//,
+      }//,
+//      controller: 'RoutingCtrl'//,
 //      resolve: {
 //        loadData: function(){}
 //      }
