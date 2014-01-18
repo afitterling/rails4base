@@ -14,7 +14,7 @@ var app = angular.module('AngularApp', [
   'sessionService'
 ]);
 
-app.config(['$routeProvider', '$httpProvider', '$locationProvider', function ($routeProvider, $httpProvider, $locationProvider) {
+app.config(['$provide', '$routeProvider', '$httpProvider', '$locationProvider', function ($provide, $routeProvider, $httpProvider, $locationProvider) {
 
   // activate push state html5
   $locationProvider.html5Mode(true).hashPrefix('!');
@@ -26,7 +26,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', function ($r
   $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken;
 
   //@TODO
-//  var errorHttpInterceptor =
+//  $provide.factory('errorHttpInterceptor',
 //    function ($q, $location, ErrorService, $rootScope) {
 //      return function (promise) {
 //        return promise.then(function (response) {
@@ -43,7 +43,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', function ($r
 //    };
 //
 //  // register my interceptors
-//  $httpProvider.interceptors.push('errorHttpInterceptor');
+  $httpProvider.interceptors.push('errorHttpInterceptor');
 
   // routes
   $routeProvider
@@ -69,6 +69,8 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', function ($r
 
 // init some stuff after bootstrap
 app.run(['$rootScope', '$http', 'logService', 'Session', function ($rootScope, $http, logService, Session) {
+
+  $http.defaults.headers.common.Authentication = 'Basic YmVlcDpib29w' // @TODO autogenerate
 
   // patch method
   var defaults = $http.defaults.headers;
