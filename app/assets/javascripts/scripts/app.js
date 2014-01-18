@@ -14,57 +14,63 @@ var app = angular.module('AngularApp', [
   'sessionService'
 ]);
 
-app.config(['$provide', '$routeProvider', '$httpProvider', '$locationProvider', function ($provide, $routeProvider, $httpProvider, $locationProvider) {
+app.config(
+  ['$routeProvider', '$httpProvider', '$locationProvider',
+    function ($routeProvider, $httpProvider, $locationProvider) {
 
-  // activate push state html5
-  $locationProvider.html5Mode(true).hashPrefix('!');
+      // activate push state html5
+      $locationProvider.html5Mode(true).hashPrefix('!');
 
-  // headers
+      // headers
 
-  // steal the CSRF-Token on client side from rails server side rendered pages via jQuery
-  var authToken = $("meta[name=\"csrf-token\"]").attr("content");
-  $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken;
+      // steal the CSRF-Token on client side from rails server side rendered pages via jQuery
+      var authToken = $("meta[name=\"csrf-token\"]").attr("content");
+      $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken;
 
-//  $provide.factory('errorHttpInterceptor',
-//    function ($q, $location, ErrorService, $rootScope) {
-//      return function (promise) {
-//        return promise.then(function (response) {
-//          return response;
-//        }, function (response) {
-//          if (response.status === 401) {
-//            $rootScope.$broadcast('event:loginRequired');
-//          } else if (response.status >= 400 && response.status < 500) {
-//            // do something
-//          }
-//          return $q.reject(response);
-//        });
-//      }
-//    });
-//
-//  // register my interceptors
-//  $httpProvider.interceptors.push('errorHttpInterceptor');
 
-  // routes
-  $routeProvider
-    .when('/:page', {
-      templateUrl: function (params) {
-        if (params.page) {
-          return '/angular/pages/' + params.page;
-        } else {
-          return '/angular/pages/home';
-        }
-        ;
-      }//,
+      var interceptor = ['$q', '$location', '$rootScope',
+        function ($q, $location, $rootScope) {
+          return function (promise) {
+            return promise.then(function (response) {
+              return response;
+            }, function (response) {
+              if (response.status === 401) {
+                $rootScope.$broadcast('event:loginRequired');
+              } else if (response.status >= 400 && response.status < 500) {
+                // @TODO
+              }
+              return $q.reject(response);
+            });
+          }
+        }];
+
+      $httpProvider.responseInterceptors.push(interceptor);
+
+      // register my interceptors
+      //$httpProvider.interceptors.push(errorHttpInterceptor);
+//      $httpProvider.interceptors.push('myHttpInterceptor');
+
+      // routes
+      $routeProvider
+        .when('/:page', {
+          templateUrl: function (params) {
+            if (params.page) {
+              return '/angular/pages/' + params.page;
+            } else {
+              return '/angular/pages/home';
+            }
+            ;
+          }//,
 //      controller: 'RoutingCtrl'//,
 //      resolve: {
 //        loadData: function(){}
 //      }
-    })
-    .otherwise({
-      redirectTo: '/'
-    });
+        })
+        .otherwise({
+          redirectTo: '/'
+        });
 
-}]);
+    }]);
 
 // init some stuff after bootstrap
 app.run(['$rootScope', '$http', 'logService', 'Session', function ($rootScope, $http, logService, Session) {

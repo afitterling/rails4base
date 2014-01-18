@@ -3,8 +3,8 @@
 angular.module('ctrls.base', [])
 
   .controller('BaseCtrl',
-    ['$scope', '$rootScope', '$resource', '$http',
-      function ($scope, $rootScope, $resource, $http) {
+    ['$scope', '$rootScope', '$resource', '$http','$location',
+      function ($scope, $rootScope, $resource, $http, $location) {
 
         // we receive this from HttpErrorInterceptor
         $scope.$on('event:loginRequired', function () {
