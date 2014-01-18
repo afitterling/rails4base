@@ -36,19 +36,18 @@ torquebox deploy
 ==== production
 
 * Install binary package, just bundle.
-* Use Nginx or apache as reverse proxy (see clustering section torquebox docs).
+* Use Nginx or Apache  as reverse proxy (see Apache's mod cluster: http://www.headlondon.com/our-thoughts/technology/posts/installing-torquebox-application-server-on-debian).
 
 No name collisions with rails apps!!!! great!!!
 
-<tt>bundle && \
-RAILS_ENV=production rake db:migrate && \
+<tt>
+bundle
+RAILS_ENV=production rake db:migrate
 RAILS_ENV=production rake assets:precompile
-#RAILS_ENV=production torquebox deploy --context-path='/app3'
-echo must manually deploy torquebox:
-echo RAILS_ENV=production torquebox deploy --context-path='/app3'
-echo RAILS_RELATIVE_URL_ROOT='/app3' RAILS_ENV=production torquebox deploy --context-path='/app3'</tt>
+echo RAILS_RELATIVE_URL_ROOT='/app3' RAILS_ENV=production torquebox deploy --context-path='/app3'
+</tt>
 
-see nginx example config if deploying on subdomain:
+Nginx example config if deploying with context path:
 
 <tt>
 server {
@@ -62,7 +61,8 @@ server {
     proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
     proxy_set_header   Host $http_host;
   }
-}</tt>
+}
+</tt>
 
 
 
