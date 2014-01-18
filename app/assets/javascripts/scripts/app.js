@@ -10,7 +10,7 @@ var app = angular.module('AngularApp', [
   'interceptors',
   'ctrls.session',
   'ctrls.base',
-  //'ctrls.routing',
+  'ctrls.routing',
   'sessionService'
 ]);
 
