@@ -19,15 +19,18 @@ app.controller('SessionCtrl',
           // success
           $rootScope.currentUser = Session.currentUser;
           $rootScope.userLoggedIn = Session.isAuthenticated();
+          $scope.clicked = false;
 
         }, function (data, status) {
 
           // error
           $scope.logger.log(data, origin);
           $scope.failed = true;
+          $scope.clicked = false;
           $timeout(function () {
             $scope.failed = false;
             $scope.retry = true;
+
           }, timeout);
 
         });
@@ -40,10 +43,13 @@ app.controller('SessionCtrl',
           // success!
           $rootScope.currentUser = Session.currentUser;
           $rootScope.userLoggedIn = Session.isAuthenticated();
+          $scope.clicked = false;
+
         }, function(data, status){
           // error
           $scope.failed = true;
           $scope.errors = data.errors
+          $scope.clicked = false;
           $timeout(function () {
             $scope.failed = false;
             $scope.retry = true;

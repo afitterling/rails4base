@@ -2,6 +2,7 @@
 
 var app = angular.module('AngularApp', [
   // vendor angular stuff
+  'ngRoute',
   'ngResource',
   // debugging
   'debug',
@@ -11,21 +12,50 @@ var app = angular.module('AngularApp', [
   'sessionService'
 ]);
 
-app.config(['$httpProvider', function (provider) {
+app.config(['$routeProvider','$httpProvider','$locationProvider', function ($routeProvider, $httpProvider, $locationProvider) {
+
+  // activate push state html5
+  $locationProvider.html5Mode(true);
 
   // headers
 
-  // steal the CSRF-Token on client side from rails server side rendered pages via jQuery :)
-  provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+  // steal the CSRF-Token on client side from rails server side rendered pages via jQuery
+  var authToken = $("meta[name=\"csrf-token\"]").attr("content");
+  $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken;
 
   // register my interceptors
   //provider.interceptors.push('authReqInterceptor'); // authentication
 
+  // routes
+
+  $routeProvider
+    .when('/:page', {
+      templateUrl: function (params) {
+        if (params.page){
+          return '/angular/pages/' + params.page;
+        } else {
+          return '/angular/pages/home';
+        };
+      }//,
+//      controller: 'RoutingCtrl'//,
+//      resolve: {
+//        loadData: function(){}
+//      }
+    })
+    .otherwise({
+      redirectTo: '/'
+    });
+
+
 }]);
 
-
 // init some stuff
-app.run(['$rootScope', '$http', 'logService','Session', function ($rootScope, $http, logService, Session) {
+app.run(['$rootScope', '$http', 'logService', 'Session', function ($rootScope, $http, logService, Session) {
+
+  // patch method
+  var defaults = $http.defaults.headers;
+  defaults.patch = defaults.patch || {};
+  defaults.patch['Content-Type'] = 'application/json';
 
   $rootScope.logger = logService;
 
@@ -34,36 +64,11 @@ app.run(['$rootScope', '$http', 'logService','Session', function ($rootScope, $h
 
   // restore session if user already logged in
 
-  $rootScope.user = Session.requestCurrentUser(function(data, status){
-    if (Session.isAuthenticated()){
+  $rootScope.user = Session.requestCurrentUser(function (data, status) {
+    if (Session.isAuthenticated()) {
       $rootScope.currentUser = Session.currentUser;
       $rootScope.userLoggedIn = Session.isAuthenticated();
-    };
+    }
   });
 
 }]);
-
-
-//app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-//
-//  // native urls without '#' for those that can handle it
-//  //$locationProvider.html5Mode(true).hashPrefix('!');
-//
-//  $routeProvider
-//    .when('/:page', {
-//      templateUrl: function (params, $rootScope) {
-//        //return '/partials/' + $rootScope.provider + params.page + '.html';
-//        return '/pages/index';
-//      }//,
-////      controller: 'RoutingCtrl'//,
-////      resolve: {
-////        loadData: function(){}
-////      }
-//    })
-//    .otherwise({
-//      redirectTo: '/'
-//    });
-//
-//}]);
-//
-//

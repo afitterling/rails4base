@@ -1,16 +1,71 @@
 == README
 
-A (j)ruby app clinging rails and angularJS basic functionalities together.
+An app clinging rails4 and angularJS basic functionalities together.
 
 It provides:
 
-* the structure of modern single page driven web apps, using promises to hide latencies and to increase implementation quality of user interactions.
+* the structure of modern single page driven web apps, using promises client side to hide latencies and to increase implementation quality of user interactions.
 
 * client site routing with AngularJS using rails as backend
 
 * user registration/authentication using angular and devise
 
 * twitter bootstrap 3+ integrated
+
+* scaleable, clusterable
+
+What follows:
+
+* torquebox features, such as message queues to connect be with client (real time!)
+
+* easy maintainable / installable (see torquebox)
+
+=== Setup
+
+Use jruby:
+
+for testing in console:
+
+<tt>gem install torquebox</tt>
+
+(do not include in Gemfile, use binary package for serverside instead: http://torquebox.org/)
+
+torquebox run
+torquebox deploy
+
+==== production
+
+* Install binary package, just bundle.
+* Use Nginx or apache as reverse proxy (see clustering section torquebox docs).
+
+No name collisions with rails apps!!!! great!!!
+
+<tt>bundle && \
+RAILS_ENV=production rake db:migrate && \
+RAILS_ENV=production rake assets:precompile
+#RAILS_ENV=production torquebox deploy --context-path='/app3'
+echo must manually deploy torquebox:
+echo RAILS_ENV=production torquebox deploy --context-path='/app3'
+echo RAILS_RELATIVE_URL_ROOT='/app3' RAILS_ENV=production torquebox deploy --context-path='/app3'</tt>
+
+see nginx example config if deploying on subdomain:
+
+<tt>
+server {
+  listen 80;
+  server_name app3.sp33c.de;
+  rewrite ^/app3(/.*)$ $1 last;
+  location / {
+    root /home/torquebox/rails4baseapp/public;
+    proxy_pass http://87.230.18.238:8080/app3/;
+    proxy_set_header   X-Real-IP        $remote_addr;
+    proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+    proxy_set_header   Host $http_host;
+  }
+}</tt>
+
+
+
 
 
 

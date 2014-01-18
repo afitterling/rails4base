@@ -9,6 +9,7 @@ class Users::SessionsController < Devise::SessionsController
                       :info => "Logged in",
                       :user => current_user
            }
+    return
   end
 
   def destroy

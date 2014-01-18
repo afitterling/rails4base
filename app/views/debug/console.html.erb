@@ -1,0 +1,12 @@
+<% if Rails.env.development? %>
+    <div class="col-lg-12">
+        <em>{{40+4}}</em>
+
+        <div style="float: none;">
+            <button ng-click="showConsole=!showConsole">toggle console</button>
+            <!-- <input name="topic" type="text" ng-model="logFilter" ng-show="showConsole" style="border: 1px solid grey;"> -->
+            <div console="" messages="loggerService" ng-show="showConsole"></div>
+        </div>
+
+    </div>
+<% end %>
