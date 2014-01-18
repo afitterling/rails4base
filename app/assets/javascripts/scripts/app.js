@@ -10,6 +10,7 @@ var app = angular.module('AngularApp', [
   'interceptors',
   'ctrls.session',
   'ctrls.base',
+  'ctrls.routing',
   'sessionService'
 ]);
 
@@ -37,8 +38,8 @@ app.config(['$routeProvider','$httpProvider','$locationProvider', function ($rou
         } else {
           return '/angular/pages/home';
         };
-      }//,
-//      controller: 'RoutingCtrl'//,
+      },
+      controller: 'RoutingCtrl'//,
 //      resolve: {
 //        loadData: function(){}
 //      }
@@ -52,6 +53,11 @@ app.config(['$routeProvider','$httpProvider','$locationProvider', function ($rou
 
 // init some stuff
 app.run(['$rootScope', '$http', 'logService', 'Session', function ($rootScope, $http, logService, Session) {
+
+//  $rootScope.restrictedPages = [
+//    '/profile',
+//    '/xyz'
+//  ];
 
   // patch method
   var defaults = $http.defaults.headers;
