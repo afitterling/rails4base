@@ -29,7 +29,8 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def show_current_user
-    warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
+    # @TODO is it safe to to send 401 here? this will get handled better in angular
+    warden.authenticate!(:scope => resource_name) #, :recall => "#{controller_path}#failure")
     render :status => 200,
            :json => { :success => true,
                       :info => "Current User",
