@@ -25,8 +25,14 @@ class AngularTemplatesController < ApplicationController
   private
 
     def partial_file
-      #subpath = ENV['RAILS_RELATIVE_URL_ROOT']
-      "#{Rails.root}/app/views/#{request.fullpath.split(ENV['RAILS_RELATIVE_URL_ROOT'])[1]}"
+      # I had problems on jboss/torquebox when deploying with context url; this fix worked!
+      # RAILS_RELATIVE_URL_ROOT='/app3' RAILS_ENV=production torquebox deploy --context-path='/app3'
+      if ENV['RAILS_RELATIVE_URL_ROOT']
+        path = request.fullpath.split(ENV['RAILS_RELATIVE_URL_ROOT'])[1]
+      else
+        path = request.fullpath
+      end
+      "#{Rails.root}/app/views/#{path}"
     end
 
     def partial_exists?
