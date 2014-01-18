@@ -25,7 +25,8 @@ class AngularTemplatesController < ApplicationController
   private
 
     def partial_file
-      "#{Rails.root}/app/views/#{request.original_fullpath}"
+      #subpath = ENV['RAILS_RELATIVE_URL_ROOT']
+      "#{Rails.root}/app/views/#{request.fullpath.split(ENV['RAILS_RELATIVE_URL_ROOT'])[1]}"
     end
 
     def partial_exists?
