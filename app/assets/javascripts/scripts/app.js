@@ -69,9 +69,8 @@ app.config(['$provide', '$routeProvider', '$httpProvider', '$locationProvider', 
 // init some stuff after bootstrap
 app.run(['$rootScope', '$http', 'logService', 'Session', function ($rootScope, $http, logService, Session) {
 
-  $http.defaults.headers.common.Authentication = 'Basic YmVlcDpib29w' // @TODO autogenerate
-
   // patch method
+
   var defaults = $http.defaults.headers;
   defaults.patch = defaults.patch || {};
   defaults.patch['Content-Type'] = 'application/json';
