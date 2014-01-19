@@ -73,7 +73,7 @@ app.config(
 
 // init some stuff right after bootstraping angular
 
-app.run(['$rootScope', '$http', 'logService', 'Session', function ($rootScope, $http, logService, Session) {
+app.run(['$rootScope', '$http', 'logService', 'Session', '$location', function ($rootScope, $http, logService, Session, $location) {
 
   // patch method
 
@@ -91,12 +91,28 @@ app.run(['$rootScope', '$http', 'logService', 'Session', function ($rootScope, $
 
   // restore session if user already logged in
 
-  $rootScope.user = Session.requestCurrentUser(function (data, status) {
+  $rootScope.currentUser = Session.requestCurrentUser(function (data, status) {
+
     if (Session.isAuthenticated()) {
       $rootScope.currentUser = Session.currentUser;
       $rootScope.userLoggedIn = Session.isAuthenticated();
     }
+
   });
 
+  // we receive this from HttpErrorInterceptor
+  $rootScope.$on('event:loginRequired', function () {
+    $location.path('/login');
+  });
 
-}]);
+  // redirect signup/login to profile - use success because of reload possible
+  $rootScope.$on('$routeChangeSuccess', function (e, current, prev) {
+    if ($rootScope.userLoggedIn) {
+      if (current.params.page === 'login' || current.params.page === 'signup') {
+        $location.path('/profile');
+      }
+    }
+  });
+
+}])
+;
