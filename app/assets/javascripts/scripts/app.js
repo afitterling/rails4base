@@ -42,7 +42,7 @@ app.config(
 
                 if (response.status === 404) {
                   // send login required on 401
-                  $rootScope.$broadcast('event:notfound');
+                  $rootScope.$broadcast('event:notFound');
                 }
 
                   // temporarily forbidden
@@ -125,8 +125,8 @@ app.run(['$rootScope', '$http', 'logService', 'Session', '$location', function (
     $location.path(url);
   });
 
-  // we get this upon 423 and got url sent back from server
-  $rootScope.$on('event:notfound', function () {
+  // 404
+  $rootScope.$on('event:notFound', function () {
     $location.path('/404');
   });
 
