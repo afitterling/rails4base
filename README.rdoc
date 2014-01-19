@@ -10,7 +10,7 @@ It provides:
 
 * user registration/authentication using angular and devise with secure client and server side routing
 
-* server side regexp mathings in routes.rb to secure angular partials/pages client side!
+* server side regexp matchings in routes.rb to control response events, e.g. 401 for security, to easily handle client side routing for angular partials/pages!
 
 * twitter bootstrap 3+ integrated
 
@@ -20,7 +20,7 @@ It provides:
 
 What follows:
 
-* torquebox features, such as message queues to connect be with client (real time!)
+* torquebox features, such as message queues to connect be with client
 
 
 === Setup
