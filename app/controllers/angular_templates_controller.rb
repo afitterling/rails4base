@@ -26,7 +26,11 @@ class AngularTemplatesController < ApplicationController
     if user_signed_in?
       render status: params[:status], json: {path: params[:client_path] }
     else
-      public
+      if params[:failsafe]
+        self.send(params[:failsafe])
+      else
+        public
+      end
     end
   end
 
