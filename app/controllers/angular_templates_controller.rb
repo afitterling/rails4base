@@ -22,11 +22,11 @@ class AngularTemplatesController < ApplicationController
     end
   end
 
-  def hide_if_auth
+  def hide
     if user_signed_in?
       render status: params[:status], json: {path: params[:client_path] }
     else
-      params[:fallback].to_s.action
+      public
     end
   end
 

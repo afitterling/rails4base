@@ -120,13 +120,12 @@ app.run(['$rootScope', '$http', 'logService', 'Session', '$location', function (
     $location.path(url);
   });
 
-  // redirect signup/login to profile - use success because of reload possible
+  $rootScope.$on('$routeChangeStart', function (e, current, prev) {
+  // @TODO
+  });
+
   $rootScope.$on('$routeChangeSuccess', function (e, current, prev) {
-//    if ($rootScope.userLoggedIn) {
-//      if (current.params.page === 'login' || current.params.page === 'signup') {
-//        $location.path('/profile');
-//      }
-//    }
+    // @TODO
   });
 
 }])
