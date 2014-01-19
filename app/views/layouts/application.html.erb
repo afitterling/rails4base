@@ -48,7 +48,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="/home">Home</a></li>
-                        <li><a href="/overview">Overview</a></li>
+                        <li ng-show="userLoggedIn"><a href="/features">Features</a></li>
                         <li ng-show="userLoggedIn"><a href="/profile"><em>You're logged in!</em></a></li>
                         <!--<li class="active"><a href="/login">Login</a></li>-->
                         <!--<li class="active"><a href="/signup">Signup</a></li>-->
@@ -146,7 +146,7 @@
 <!--<a href="/home">home</a>-->
 <!--<b>angular partials:</b>-->
 
-<div ng-view class="container"></div>
+<div ng-view class="partials container"></div>
 
 
 <!-- Marketing messaging and featurettes

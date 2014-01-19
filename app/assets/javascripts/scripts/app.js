@@ -40,7 +40,12 @@ app.config(
 
               } else if (response.status >= 400 && response.status < 500) {
 
-                // temporarily forbidden
+                if (response.status === 404) {
+                  // send login required on 401
+                  $rootScope.$broadcast('event:notfound');
+                }
+
+                  // temporarily forbidden
                 // rails should have sent back data.url (server side: client_path) where we want to go!
 
                 if (response.status === 423) {
@@ -120,11 +125,16 @@ app.run(['$rootScope', '$http', 'logService', 'Session', '$location', function (
     $location.path(url);
   });
 
-  $rootScope.$on('$routeChangeStart', function (e, current, prev) {
-  // @TODO
+  // we get this upon 423 and got url sent back from server
+  $rootScope.$on('event:notfound', function () {
+    $location.path('/404');
   });
 
-  $rootScope.$on('$routeChangeSuccess', function (e, current, prev) {
+  $rootScope.$on('$routeChangeStart', function (e, next, cur) {
+    // @TODO
+  });
+
+  $rootScope.$on('$routeChangeSuccess', function (e, cur, prev) {
     // @TODO
   });
 
