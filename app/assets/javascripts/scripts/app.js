@@ -33,11 +33,20 @@ app.config(
             return promise.then(function (response) {
               return response;
             }, function (response) {
+
               if (response.status === 401) {
                 // send login required on 401
                 $rootScope.$broadcast('event:loginRequired');
+
               } else if (response.status >= 400 && response.status < 500) {
-                // @TODO failsafes
+
+                // temporarily forbidden
+                // rails should have sent back data.url (server side: client_path) where we want to go!
+
+                if (response.status === 423) {
+                  $rootScope.$broadcast('event:redirect', response.data.path);
+                }
+
               }
               return $q.reject(response);
             });
@@ -100,18 +109,24 @@ app.run(['$rootScope', '$http', 'logService', 'Session', '$location', function (
 
   });
 
-  // we receive this from HttpErrorInterceptor
+
+  // we receive this from HttpErrorInterceptor on 401
   $rootScope.$on('event:loginRequired', function () {
     $location.path('/login');
   });
 
+  // we get this upon 423 and got url sent back from server
+  $rootScope.$on('event:redirect', function (e, url) {
+    $location.path(url);
+  });
+
   // redirect signup/login to profile - use success because of reload possible
   $rootScope.$on('$routeChangeSuccess', function (e, current, prev) {
-    if ($rootScope.userLoggedIn) {
-      if (current.params.page === 'login' || current.params.page === 'signup') {
-        $location.path('/profile');
-      }
-    }
+//    if ($rootScope.userLoggedIn) {
+//      if (current.params.page === 'login' || current.params.page === 'signup') {
+//        $location.path('/profile');
+//      }
+//    }
   });
 
 }])
