@@ -22,10 +22,17 @@ App::Application.routes.draw do
   # deliver templates angular client is requesting
   scope "/angular", controller: :angular_templates do
 
-    # secured
+    # secure following urls
     scope "/", action: :secure do
       get "/pages/profile"
       get "/pages/xyz"
+    end
+
+    # if authenticated, hide temporarily following angular server side urls and suggest client
+    # alternate angular $location path (client_path) where it should navigate to upon status received
+    scope "/", action: :hide_if_auth, fallback: :public do
+      get "/pages/login", status: 423, client_path: "/profile"
+      get "/pages/signup", status: 423, client_path: "/profile"
     end
 
     # non restricted
