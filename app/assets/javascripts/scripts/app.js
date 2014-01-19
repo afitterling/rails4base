@@ -120,11 +120,11 @@ app.run(['$rootScope', '$http', 'logService', 'Session', '$location', function (
     $location.path(url);
   });
 
-  $rootScope.$on('$routeChangeStart', function (e, current, prev) {
-  // @TODO
+  $rootScope.$on('$routeChangeStart', function (e, next, cur) {
+    // @TODO
   });
 
-  $rootScope.$on('$routeChangeSuccess', function (e, current, prev) {
+  $rootScope.$on('$routeChangeSuccess', function (e, cur, prev) {
     // @TODO
   });
 
