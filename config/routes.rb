@@ -19,7 +19,6 @@ App::Application.routes.draw do
     # secure following urls
     scope "/", action: :secure do
       get "/pages/profile"
-      get "/pages/features"
     end
 
     # if authenticated, hide temporarily following angular server side urls and suggest client
