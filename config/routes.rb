@@ -8,18 +8,12 @@ App::Application.routes.draw do
     get "users/restore" => "users/sessions#user_logged_in"
   end
 
-  # Client:toChooseUrl --req--> Rack --routes--> Controller:pages#index --renders Layout:withoutYield --> Client:withChosenUrl
-  # --> angular:picksBrowserUrl --pushState-> Client
-
   # route any client requests to angular main app
-  # pages#index does nothing but render layout
+  # pages#index does nothing but render layout (which contains ng-view)
   get "/" => "pages#index"
   get "/(:pages(/:subpage))" => "pages#index"
 
-  scope module: "api" do
-  end
-
-  # deliver templates angular client is requesting
+  # deliver templates angular client app is requesting
   scope "/angular", controller: :angular_templates do
 
     # secure following urls
@@ -37,6 +31,11 @@ App::Application.routes.draw do
 
     # non restricted
     get ":template_class/:template_name", action: :public
+  end
+
+  ## api
+  scope module: "api" do
+
   end
 
 end
