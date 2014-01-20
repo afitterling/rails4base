@@ -45,7 +45,7 @@ app.config(
                   $rootScope.$broadcast('event:notFound');
                 }
 
-                  // temporarily forbidden
+                // temporarily forbidden
                 // rails should have sent back data.url (server side: client_path) where we want to go!
 
                 if (response.status === 423) {
@@ -87,7 +87,23 @@ app.config(
 
 // init some stuff right after bootstraping angular
 
-app.run(['$rootScope', '$http', 'logService', 'Session', '$location', function ($rootScope, $http, logService, Session, $location) {
+app.run(['$rootScope', '$http', 'logService', 'Session', '$location', '$templateCache', function ($rootScope, $http, logService, Session, $location, $templateCache) {
+
+
+  // pre-cache important templates
+  // @TODO get templates per json from rails
+
+  var templates = [
+    '/angular/pages/home',
+    '/angular/pages/features'
+  ];
+
+  for (var i = 0; i < templates.length; i++) {
+    $http.get(templates[i])
+      .success(function (data) {
+        $templateCache.put(templates[i], data);
+      });
+  }
 
   // patch method
 
@@ -131,11 +147,15 @@ app.run(['$rootScope', '$http', 'logService', 'Session', '$location', function (
   });
 
   $rootScope.$on('$routeChangeStart', function (e, next, cur) {
-    // @TODO
+    $rootScope.loadingTemplate = true
   });
 
   $rootScope.$on('$routeChangeSuccess', function (e, cur, prev) {
     // @TODO
+  });
+
+  $rootScope.$on('$viewContentLoaded', function () {
+    $rootScope.loadingTemplate = false
   });
 
 }])
