@@ -131,11 +131,18 @@ app.run(['$rootScope', '$http', 'logService', 'Session', '$location', function (
   });
 
   $rootScope.$on('$routeChangeStart', function (e, next, cur) {
-    // @TODO
+    // @FIXME Angular spec. animations
+    //$("#partial").fadeOut();
+    $rootScope.loadingTemplate = true
   });
 
   $rootScope.$on('$routeChangeSuccess', function (e, cur, prev) {
     // @TODO
+  });
+
+  $rootScope.$on('$viewContentLoaded', function() {
+    $rootScope.loadingTemplate = false
+//    $("#partial").fadeIn();
   });
 
 }])
