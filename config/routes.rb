@@ -19,14 +19,13 @@ App::Application.routes.draw do
     # secure following urls
     scope "/", action: :secure do
       get "/pages/profile"
-      get "/pages/features"
     end
 
     # if authenticated, hide temporarily following angular server side urls and suggest client
     # alternate angular $location path (client_path) where it should navigate to upon status received
-    scope "/", action: :hide, failsafe: :public do
-      get "/pages/login", status: 423, client_path: "/profile"
-      get "/pages/signup", status: 423, client_path: "/profile"
+    scope "/", action: :hide, status: 423 do
+      get "/pages/login", client_path: "/profile"
+      get "/pages/signup", client_path: "/profile"
     end
 
     # non restricted
