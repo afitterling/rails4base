@@ -37,7 +37,7 @@ class AngularTemplatesController < ApplicationController
 
   # build template path from url
     def partial_file
-      # I had problems on jboss/torquebox when deploying to a context url, the code below works.
+      # I had problems on jboss/torquebox if deploying to a context url. The code below works:
       # RAILS_RELATIVE_URL_ROOT='/app3' RAILS_ENV=production torquebox deploy --context-path='/app3'
       if ENV['RAILS_RELATIVE_URL_ROOT']
         path = request.fullpath.split(ENV['RAILS_RELATIVE_URL_ROOT'])[1]
