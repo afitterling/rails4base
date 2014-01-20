@@ -1,7 +1,6 @@
 class AngularTemplatesController < ApplicationController
 
   def public
-    logger.debug request
     if partial_exists?
       render partial_file, :layout => false
     else
