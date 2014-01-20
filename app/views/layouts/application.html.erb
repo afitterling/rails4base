@@ -149,8 +149,16 @@
 <!--<a href="/home">home</a>-->
 <!--<b>angular partials:</b>-->
 
-<div ng-show="loadingTemplate" class="container">Loading ....</div>
-<div ng-view id="partial" class="container"></div>
+<div ng-show="loadingTemplate" class="container" style="height: 200px;">
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2>Caching content <img src="/assets/static/icons/spinner_32x32.gif"></h2>
+        </div>
+    </div>
+</div>
+
+
+<div ng-view ng-hide="loadingTemplate" id="partial" class="container"></div>
 
 
 <!-- Marketing messaging and featurettes

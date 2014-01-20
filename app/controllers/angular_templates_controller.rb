@@ -2,6 +2,7 @@ class AngularTemplatesController < ApplicationController
 
   def public
     if partial_exists?
+      sleep 2
       render partial_file, :layout => false
     else
       render text: :none, status: 404
