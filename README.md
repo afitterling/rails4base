@@ -20,7 +20,7 @@ It provides:
 
 * twitter bootstrap 3+ integrated
 
-If deploy on Torquebox:
+In case of Torquebox:
 
 * scaleable, clusterable
 
@@ -28,24 +28,25 @@ If deploy on Torquebox:
 
 What follows:
 
-* torquebox features, such as message queues to connect be with client
+* torquebox features, such as realtime messaging between multi node servers and clients
 
 ## Setup
 
 Use jruby:
 `rvm use jruby`
 
-for testing in console:
-`gem install torquebox`
+For testing purpoises:
+`gem install torquebox-server`
 (Do not include in Gemfile. Server side use binary package instead: http://torquebox.org/)
 
 `torquebox run`
 
+Open a second terminal:
 `torquebox deploy`
 
 ### production
 
-* Install binary package, just bundle.
+* Installation of Torquebox binary package recommended, it ships with JRuby.
 
 * Use Nginx or Apache  as reverse proxy (see Apache's mod cluster: http://www.headlondon.com/our-thoughts/technology/posts/installing-torquebox-application-server-on-debian).
 
@@ -56,18 +57,16 @@ RAILS_ENV=production rake db:migrate
 RAILS_ENV=production rake assets:precompile```
 
 Setting RAILS_RELATIVE_URL_ROOT is necessary if deploying to context path:
-RAILS_RELATIVE_URL_ROOT='/subpath' RAILS_ENV=production torquebox deploy --context-path='/subpath'`
+`RAILS_RELATIVE_URL_ROOT='/subpath' RAILS_ENV=production torquebox deploy --context-path='/subpath'`
 
 
-## Nginx Setup example
+## Nginx setup
 
-Nginx to use as reverse proxy with JBoss/Torquebox
-
-_Config example_
+Nginx to use as reverse proxy with JBoss/Torquebox:
 
 ```server {
      listen 80;
-     server_name app3.sp33c.de;
+     server_name subpath.example.com;
      rewrite ^/subpath(/.*)$ $1 last; // if deploying with context path
      location / {
        root /home/torquebox/railsapp/public;
