@@ -65,16 +65,17 @@ Setting RAILS_RELATIVE_URL_ROOT is necessary if deploying to context path:
 
 Nginx to use as reverse proxy with JBoss/Torquebox:
 
-```server {
-     listen 80;
-     server_name subpath.example.com;
-     rewrite ^/subpath(/.*)$ $1 last; // if deploying with context path
-     location / {
-       root /home/torquebox/railsapp/public;
-       proxy_pass http://87.230.18.238:8080/subpath/;
-       proxy_set_header   X-Real-IP        $remote_addr;
-       proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-       proxy_set_header   Host $http_host;
-     }
-   }
+```
+server {
+ listen 80;
+ server_name subpath.example.com;
+ rewrite ^/subpath(/.*)$ $1 last; // if deploying with context path
+ location / {
+   root /home/torquebox/railsapp/public;
+   proxy_pass http://87.230.18.238:8080/subpath/;
+   proxy_set_header   X-Real-IP        $remote_addr;
+   proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+   proxy_set_header   Host $http_host;
+ }
+}
 ```
