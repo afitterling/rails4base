@@ -62,7 +62,7 @@ Setting RAILS_RELATIVE_URL_ROOT is necessary if deploying to context path. Deplo
 
 ### I prefer Ruby over JRuby.
 
-Ruby is supported without the torquebox features.
+Ruby is supported without the torquebox features. It definately should work until or around commit: `f7634f46b8d882fb496ab050fdffce4d028cf03c`
 
 ## Reverse proxy
 
