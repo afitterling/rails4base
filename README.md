@@ -10,20 +10,25 @@ __Dependencies__: _JRuby suggested (http://torquebox.org/) / Ruby supported._
 
 It provides:
 
-    * a structure of modern single page driven web apps to increase implementation quality for advanced user / micro interactions
-    * promises in frontend to hide latencies and to achieve rather small feedback loops
-    * registration/authentication using AngularJS and Devise for secure client and server side routing
-    * server side regexp matchings in Rails routes to control client side routing!
-    * Twitter Bootstrap 3+ integrated
+* a structure of modern single page driven web apps to increase implementation quality for advanced user / micro interactions
+
+* promises in frontend to hide latencies and to achieve rather small feedback loops
+
+* registration/authentication using AngularJS and Devise for secure client and server side routing
+
+* server side regexp matchings in Rails routes to control client side routing!
+
+* Twitter Bootstrap 3+ integrated
 
 In case of Torquebox:
 
-    * scaleable, clusterable
-    * easy maintainable / installable
+* scaleable, clusterable
+
+* easy maintainable / installable
 
 What follows:
 
-    * Torquebox features, such as realtime messaging between multi node servers and clients
+* Torquebox features, such as realtime messaging between multi node servers and clients
 
 ## Setup
 
@@ -41,8 +46,9 @@ What follows:
 
 ### production
 
-    * Installation of Torquebox binary package recommended, it comes with JRuby.
-    * Use Nginx or Apache as reverse proxy (see Apache's mod cluster: http://www.headlondon.com/our-thoughts/technology/posts/installing-torquebox-application-server-on-debian).
+* Installation of Torquebox binary package recommended, it comes with JRuby.
+
+* Use Nginx or Apache as reverse proxy (see Apache's mod cluster: http://www.headlondon.com/our-thoughts/technology/posts/installing-torquebox-application-server-on-debian).
 
 __No name collisions with rails apps!!!! great!!!__
 
