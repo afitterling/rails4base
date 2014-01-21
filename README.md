@@ -54,7 +54,8 @@ No name collisions with rails apps!!!! great!!!
 
 ```bundle
 RAILS_ENV=production rake db:migrate
-RAILS_ENV=production rake assets:precompile```
+RAILS_ENV=production rake assets:precompile
+```
 
 Setting RAILS_RELATIVE_URL_ROOT is necessary if deploying to context path:
 `RAILS_RELATIVE_URL_ROOT='/subpath' RAILS_ENV=production torquebox deploy --context-path='/subpath'`
@@ -75,4 +76,5 @@ Nginx to use as reverse proxy with JBoss/Torquebox:
        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
        proxy_set_header   Host $http_host;
      }
-   }```
+   }
+```
