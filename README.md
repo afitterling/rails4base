@@ -35,35 +35,36 @@ What follows:
 Use jruby:
 `rvm use jruby`
 
-For testing purpoises:
+### development
+
 `gem install torquebox-server`
 (Do not include in Gemfile. Server side use binary package instead: http://torquebox.org/)
 
 `torquebox run`
 
-Open a second terminal:
 `torquebox deploy`
 
 ### production
 
-* Installation of Torquebox binary package recommended, it ships with JRuby.
+* Installation of Torquebox binary package recommended, it comes with JRuby.
 
 * Use Nginx or Apache  as reverse proxy (see Apache's mod cluster: http://www.headlondon.com/our-thoughts/technology/posts/installing-torquebox-application-server-on-debian).
 
-No name collisions with rails apps!!!! great!!!
+__No name collisions with rails apps!!!! great!!!__
 
 ```bundle
 RAILS_ENV=production rake db:migrate
 RAILS_ENV=production rake assets:precompile
 ```
 
-Setting RAILS_RELATIVE_URL_ROOT is necessary if deploying to context path:
+Setting RAILS_RELATIVE_URL_ROOT is necessary if deploying to context path. Deploy with:
 `RAILS_RELATIVE_URL_ROOT='/subpath' RAILS_ENV=production torquebox deploy --context-path='/subpath'`
 
 
-## Nginx setup
+## Reverse proxy
 
-Nginx to use as reverse proxy with JBoss/Torquebox:
+Example Nginx config to use as reverse proxy:
+
 
 ```
 server {
@@ -79,3 +80,4 @@ server {
  }
 }
 ```
+
