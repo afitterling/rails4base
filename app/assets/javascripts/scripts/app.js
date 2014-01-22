@@ -148,6 +148,7 @@ app.run(['$rootScope', '$http', 'logService', 'Session', '$location', '$template
 
   $rootScope.$on('$routeChangeStart', function (e, next, cur) {
     $rootScope.loadingTemplate = true
+    // comment
   });
 
   $rootScope.$on('$routeChangeSuccess', function (e, cur, prev) {
