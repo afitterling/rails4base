@@ -132,7 +132,7 @@ app.run(['$rootScope', '$http', 'logService', 'Session', '$location', '$template
 
 
   // we receive this from HttpErrorInterceptor on 401
-  $rootScope.$on('event:loginRequired', function (url) {
+  $rootScope.$on('event:loginRequired', function (e, url) {
     $location.path(url);
   });
 
