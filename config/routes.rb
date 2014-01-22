@@ -17,7 +17,7 @@ App::Application.routes.draw do
   scope "/angular", controller: :angular_templates do
 
     # secure following urls
-    scope "/", action: :secure do
+    scope "/", action: :secure, status: 401, client_path: "/login" do
       get "/pages/profile"
     end
 

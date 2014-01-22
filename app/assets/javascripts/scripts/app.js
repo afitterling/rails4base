@@ -36,7 +36,7 @@ app.config(
 
               if (response.status === 401) {
                 // send login required on 401
-                $rootScope.$broadcast('event:loginRequired');
+                $rootScope.$broadcast('event:loginRequired', response.data.path);
 
               } else if (response.status >= 400 && response.status < 500) {
 
@@ -132,8 +132,8 @@ app.run(['$rootScope', '$http', 'logService', 'Session', '$location', '$template
 
 
   // we receive this from HttpErrorInterceptor on 401
-  $rootScope.$on('event:loginRequired', function () {
-    $location.path('/login');
+  $rootScope.$on('event:loginRequired', function (url) {
+    $location.path(url);
   });
 
   // we get this upon 423 and got url sent back from server
