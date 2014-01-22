@@ -15,7 +15,7 @@ class AngularTemplatesController < ApplicationController
       if user_signed_in?
         render partial_file, :layout => false
       else
-        render text: :none, status: 401
+        render json: {path: params[:client_path] }, status: params[:status]
       end
     else
       render text: :none, status: 404
