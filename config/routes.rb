@@ -16,7 +16,7 @@ App::Application.routes.draw do
   # deliver templates angular client app is requesting
   scope "/angular", controller: :angular_templates do
 
-    # secure following urls
+    # secure following urls server side and suggest client app alternate client_path
     scope "/", action: :secure, status: 401, client_path: "/login" do
       get "/pages/profile"
     end
