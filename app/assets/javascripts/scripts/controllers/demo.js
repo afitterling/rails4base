@@ -7,10 +7,10 @@ angular.module('ctrls.demo', [])
       function ($scope, $rootScope, $resource, $http, $location) {
 
         $scope.getDemoData = function(){
-          $http.get('/api/json/').success(function(data){
-            console.log(data);
+          $http.get('/api/json/').success(function(data, status){
+            $scope.data = {data: data, status: status};
           }).error(function(data, status){
-            console.log(status);
+            $scope.data = {data: data, status: status};
           });
         }
 

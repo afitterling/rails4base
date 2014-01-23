@@ -3,7 +3,7 @@
 <!--<hr class="featurette-divider">-->
 
 <div class="row featurette">
-    <div class="col-md-7">
+    <div class="col-md-7" ng-controller="DemoCtrl">
         <h2 class="featurette-heading">First aspect. <span class="text-muted">Security.</span>
         </h2>
 
@@ -18,7 +18,10 @@
             <a href="https://github.com/afitterling/rails4base/blob/master/app/assets/javascripts/scripts/app.js#L30">response
                 interceptor</a>
             processes these codes client side.</p>
-        <p class="lead" ng-controller="DemoCtrl">Just see if can get json data if not logged in: <button class="btn btn-default" ng-click="getDemoData()">Get Data</button>.</p>
+        <p class="lead">Not only your partials also your API can get protected <button class="btn btn-default" ng-click="getDemoData()">get data</button></p>
+
+        <p class="lead"><span ng-class="{'text-danger': data.status==401, 'text-success': data.status==200 }">{{data && 'server response = '}}{{data | json}}</span></p>
+
     </div>
     <div class="col-md-5" ng-controller="DemoCtrl">
 
