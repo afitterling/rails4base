@@ -9,6 +9,7 @@ var app = angular.module('AngularApp', [
   // apps modules
   'ctrls.account',
   'ctrls.base',
+  'ctrls.demo',
   'sessionService'
 ]);
 
