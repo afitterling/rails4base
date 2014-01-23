@@ -87,8 +87,9 @@ app.config(
 
 // init some stuff right after bootstraping angular
 
-app.run(['$rootScope', '$http', 'logService', 'Session', '$location', '$templateCache', function ($rootScope, $http, logService, Session, $location, $templateCache) {
+app.run(['$rootScope', '$http', 'logService', 'Session', '$location', '$templateCache','$timeout', function ($rootScope, $http, logService, Session, $location, $templateCache, $timeout) {
 
+  var crashWarningTimeOut = 5000;
 
   // pre-cache important templates
   // @TODO get templates per json from rails
@@ -147,7 +148,15 @@ app.run(['$rootScope', '$http', 'logService', 'Session', '$location', '$template
   });
 
   $rootScope.$on('$routeChangeStart', function (e, next, cur) {
+    $rootScope.templateLoaded = false
     $rootScope.loadingTemplate = true
+    $timeout(function () {
+      if ($rootScope.templateLoaded == false) {
+        // this should not happen in production
+        // @TODO check if requests are active &&
+        $rootScope.crashed = true
+      }
+    }, crashWarningTimeOut)
   });
 
   $rootScope.$on('$routeChangeSuccess', function (e, cur, prev) {
@@ -155,6 +164,7 @@ app.run(['$rootScope', '$http', 'logService', 'Session', '$location', '$template
   });
 
   $rootScope.$on('$viewContentLoaded', function () {
+    $rootScope.templateLoaded = true
     $rootScope.loadingTemplate = false
   });
 
