@@ -8,6 +8,11 @@ App::Application.routes.draw do
     get "users/restore" => "users/sessions#user_logged_in"
   end
 
+  ## api
+  scope "/api", module: "api" do
+     get "/json" => "demo#index"
+  end
+
   # route any client requests to angular main app
   # pages#index does nothing but render layout (which contains ng-view)
   get "/" => "pages#index"
@@ -32,9 +37,5 @@ App::Application.routes.draw do
     get ":template_class/:template_name", action: :public
   end
 
-  ## api
-  scope module: "api" do
-
-  end
 
 end

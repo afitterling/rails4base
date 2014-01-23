@@ -33,12 +33,12 @@ app.config(
             return promise.then(function (response) {
               return response;
             }, function (response) {
+              if (response.status >= 400 && response.status < 500) {
 
-              if (response.status === 401) {
-                // send login required on 401
-                $rootScope.$broadcast('event:loginRequired', response.data.path);
-
-              } else if (response.status >= 400 && response.status < 500) {
+                if (response.status === 401) {
+                  // send login required on 401
+                  $rootScope.$broadcast('event:loginRequired', response.data.path);
+                }
 
                 if (response.status === 404) {
                   // send login required on 401
@@ -47,7 +47,6 @@ app.config(
 
                 // temporarily forbidden
                 // rails should have sent back data.url (server side: client_path) where we want to go!
-
                 if (response.status === 423) {
                   $rootScope.$broadcast('event:redirect', response.data.path);
                 }
