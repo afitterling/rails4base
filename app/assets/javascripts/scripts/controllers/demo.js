@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('ctrls.base', [])
+angular.module('ctrls.demo', [])
 
-  .controller('BaseCtrl',
+  .controller('DemoCtrl',
     ['$scope', '$rootScope', '$resource', '$http','$location',
       function ($scope, $rootScope, $resource, $http, $location) {
 

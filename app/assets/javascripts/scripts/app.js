@@ -8,7 +8,7 @@ var app = angular.module('AngularApp', [
   'debug',
   // apps modules
   'ctrls.account',
-  'ctrls.base',
+  'ctrls.demo',
   'sessionService'
 ]);
 
