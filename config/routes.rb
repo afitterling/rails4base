@@ -6,8 +6,11 @@ App::Application.routes.draw do
     get "users/logout" => "users/sessions#destroy"
     post "users/sign_up" => "users/registrations#create"
     get "users/restore" => "users/sessions#user_logged_in"
+    post "users/confirmation" => "users/confirmations#create"
+    get "users/confirmation/new" => "devise/confirmations#new"
   end
-
+  get '/user_confirm' => 'devise/confirmations#show', as: "confirmation"
+  
   ## api
   scope "/api", module: "api" do
      get "/json" => "demo#index"

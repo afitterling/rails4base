@@ -12,7 +12,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if resource.save
       sign_up(resource_name, resource)
-      UserMailer.sign_up_confirmation_mail(resource, password).deliver
       render json: { success: true, user: resource}, status: 200
     else
       # send 406 - resource not acceptable due to validation issues
@@ -23,6 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def sign_up(resource_name, resource)
     sign_in(resource_name, resource)
+    resource.send_confirmation_instructions
   end
 
   private
