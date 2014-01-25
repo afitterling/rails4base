@@ -28,7 +28,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     if resource.errors.empty?
       #set_flash_message(:notice, :confirmed) if is_flashing_format?
       #respond_with_navigational(resource){ redirect_to after_confirmation_path_for(resource_name, resource) }
-      render json: {path: "/profile"}, status: 302
+      redirect_to "/profile"
     else
       respond_with_navigational(resource.errors, :status => :unprocessable_entity){ render :new }
       #render status: 500
