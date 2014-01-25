@@ -30,6 +30,10 @@ What follows:
 
 * Torquebox features, such as realtime messaging between multi node servers and clients
 
+Single page? - how is the CSRF security meachism managed?
+
+The CSRF devise critical parts are monkey patched in the user controllers, to be able to re-exchange updated CSRF tokens with json only by setting the appropriate response headers. Angular will handle this in its request interceptor (see app.js).  
+
 ## Setup
 
 `rvm use jruby`
