@@ -10,7 +10,9 @@ angular.module('sessionService', [])
               service.currentUser = data.user;
               var updatedAuthToken = headers('X-Csrf-Token');
               $http.defaults.headers.common['X-CSRF-TOKEN'] = updatedAuthToken;
-              successCallback(data, status) ;
+              if (typeof successCallback !== 'undefined') {
+                successCallback(data, status);
+              }
               $location.path('/profile');
             }
           }).error(function (data, status, headers, config) {
@@ -36,7 +38,9 @@ angular.module('sessionService', [])
         $http.post('/users/sign_up', {user: {email: email} })
           .success(function (data, status) {
             service.currentUser = data.user;
-            successCallback(data, status);
+            if (typeof successCallback !== 'undefined') {
+              successCallback(data, status);
+            }
             $location.path('/profile')
           })
           .error(function (data, status) {
@@ -60,7 +64,9 @@ angular.module('sessionService', [])
           .success(function (data, status) {
             // success
             service.currentUser = data.user;
-            successCallback(data, status);
+            if (typeof successCallback !== 'undefined') {
+              successCallback(data, status);
+            }
           }).error(function (data, status) {
             // error
             //errorCallback(data, status);
