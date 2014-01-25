@@ -12,9 +12,11 @@ App::Application.routes.draw do
     post "users/confirmation" => "users/confirmations#create" #, as: "user_confirmation"
     get "users/confirmation/:confirmation_token/:id" => "users/confirmations#show", as: "confirmation"
 
-    put "users/password" => "users/passwords#update"
-    patch "users/password" => "users/passwords#update"
-    #........ @TODO missing
+    #@TODO password
+
+    put "users/password" => "api/users#update"
+    patch "users/password" => "api/users#update"
+
   end
 
   

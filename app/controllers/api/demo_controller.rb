@@ -1,4 +1,5 @@
 class Api::DemoController < ApplicationController
+  respond_to :json
   before_filter :restrict
 
   def index

@@ -9,7 +9,8 @@ angular.module('sessionService', [])
             if (status === 200) {
               service.currentUser = data.user;
               successCallback(data, status);
-              $location.path('/profile')
+              //$location.path('/profile')
+              window.location.href = '/profile'; // quick fix for CSRF updates after login!
             }
           }).error(function (data, status, headers, config) {
             errorCallback(data, status);
@@ -21,6 +22,8 @@ angular.module('sessionService', [])
         $http.get('/users/logout').success(function (data, status) {
           service.currentUser = null;
           successCallback(data, status);
+          //@FIXME CSRF Issue
+          //$location.path('/home')
           window.location.href = '/home';
         });
       },
@@ -32,6 +35,7 @@ angular.module('sessionService', [])
             service.currentUser = data.user;
             successCallback(data, status);
             $location.path('/profile')
+            //window.location.href = '/home';
           })
           .error(function (data, status) {
             errorCallback(data, status);
