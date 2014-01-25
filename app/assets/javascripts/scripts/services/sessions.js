@@ -5,12 +5,15 @@ angular.module('sessionService', [])
 
       login: function (email, password, successCallback, errorCallback) {
         $http.post('/users/sign_in', {user: {email: email, password: password} })
-          .success(function (data, status) {
+          .success(function (data, status, headers) {
             if (status === 200) {
               service.currentUser = data.user;
-              successCallback(data, status);
-              //$location.path('/profile')
-              window.location.href = '/profile'; // quick fix for CSRF updates after login!
+              var updatedAuthToken = headers('X-Csrf-Token');
+              $http.defaults.headers.common['X-CSRF-TOKEN'] = updatedAuthToken;
+              if (typeof successCallback !== 'undefined') {
+                successCallback(data, status);
+              }
+              $location.path('/profile');
             }
           }).error(function (data, status, headers, config) {
             errorCallback(data, status);
@@ -19,12 +22,14 @@ angular.module('sessionService', [])
       },
 
       logout: function (successCallback, redirectTo) {
-        $http.get('/users/logout').success(function (data, status) {
+        $http.get('/users/logout').success(function (data, status, headers) {
           service.currentUser = null;
-          successCallback(data, status);
-          //@FIXME CSRF Issue
-          //$location.path('/home')
-          window.location.href = '/home';
+          if (typeof successCallback !== 'undefined') {
+            successCallback(data, status, headers);
+            var updatedAuthToken = headers('X-Csrf-Token');
+            $http.defaults.headers.common['X-CSRF-TOKEN'] = updatedAuthToken;
+          }
+          $location.path('/home');
         });
       },
 
@@ -33,9 +38,10 @@ angular.module('sessionService', [])
         $http.post('/users/sign_up', {user: {email: email} })
           .success(function (data, status) {
             service.currentUser = data.user;
-            successCallback(data, status);
+            if (typeof successCallback !== 'undefined') {
+              successCallback(data, status);
+            }
             $location.path('/profile')
-            //window.location.href = '/home';
           })
           .error(function (data, status) {
             errorCallback(data, status);
@@ -58,7 +64,9 @@ angular.module('sessionService', [])
           .success(function (data, status) {
             // success
             service.currentUser = data.user;
-            successCallback(data, status);
+            if (typeof successCallback !== 'undefined') {
+              successCallback(data, status);
+            }
           }).error(function (data, status) {
             // error
             //errorCallback(data, status);

@@ -11,6 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if resource.save
       sign_up(resource_name, resource)
+      response.headers['X-CSRF-Token'] = form_authenticity_token
       render json: { success: true, user: resource}, status: 200
     else
       # send 406 - resource not acceptable due to validation issues

@@ -62,7 +62,7 @@ app.controller('AccountCtrl',
 
       // logout
       $scope.logout = function(){
-        Session.logout(function(){
+        Session.logout(function(data, status, headers){
           // success
           $rootScope.currentUser = Session.currentUser;
           $rootScope.userLoggedIn = Session.isAuthenticated();
