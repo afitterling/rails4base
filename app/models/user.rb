@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   end
 
   # custom as_json
-  def as_json
+  def as_json( options=nil )
     { id: self.id, email: self.email, confirmed: self.confirmed?}
   end
 

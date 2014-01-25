@@ -29,17 +29,15 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def user_logged_in
-    # @TODO is it safe to to send 401 here? this will get handled better in angular
     warden.authenticate!(:scope => resource_name) #, :recall => "#{controller_path}#failure")
+    # take the devise user and build model myself monkey path as_json
     user = User.where(id: current_user.id).first
-    #user.confi
     render :status => 200,
            :json => { :success => true,
                       :info => "Current User",
                       :user => user.as_json
 
            }
-
   end
 
 end

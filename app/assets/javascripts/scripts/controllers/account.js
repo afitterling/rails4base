@@ -69,4 +69,9 @@ app.controller('AccountCtrl',
         });
       };
 
+      $scope.changePassword = function(password){
+        //@TODO patch, $resource?
+        //$http.put('/users/password')
+      };
+
     }]);
