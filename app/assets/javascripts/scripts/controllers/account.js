@@ -74,6 +74,7 @@ app.controller('AccountCtrl',
         Password.update({id: $scope.currentUser.id, password: password}, function(){
           // success
           Session.login($scope.currentUser.email, password, function(){}, function(){});
+          $scope.passwordChanged = true;
         }, function(){});
       };
 
