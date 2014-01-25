@@ -10,4 +10,9 @@ class User < ActiveRecord::Base
     self.password = ('0'..'z').to_a.shuffle.first(8).join
   end
 
+  # custom as_json
+  def as_json
+    { id: self.id, email: self.email, confirmed: self.confirmed?}
+  end
+
 end
