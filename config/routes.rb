@@ -1,15 +1,18 @@
 App::Application.routes.draw do
 
-  devise_for :users, skip: :all
+  devise_for :users, skip: :all # [:registration, :session, :password]
   devise_scope :user do
+    post "users/sign_up" => "users/registrations#create"
+    
     post "users/sign_in" => "users/sessions#create"
     get "users/logout" => "users/sessions#destroy"
-    post "users/sign_up" => "users/registrations#create"
     get "users/restore" => "users/sessions#user_logged_in"
-    post "users/confirmation" => "users/confirmations#create"
-    get "users/confirmation/new" => "devise/confirmations#new"
+
+    get "users/confirmation/new" => "users/confirmations#new" #, as: "new_user_confirmation"
+    post "users/confirmation" => "users/confirmations#create" #, as: "user_confirmation"
+    get "users/confirmation/:confirmation_token/:id" => "users/confirmations#show", as: "confirmation"
   end
-  get '/user_confirm' => 'devise/confirmations#show', as: "confirmation"
+
   
   ## api
   scope "/api", module: "api" do
