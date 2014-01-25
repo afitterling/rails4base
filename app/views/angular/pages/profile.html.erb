@@ -1,59 +1,58 @@
-<!--<hr class="featurette-divider">-->
-
-<!--<div class="row">-->
-    <!--<div class="col-lg-6 col-offset-3">-->
-
-        <!--<form name="SignInForm" ng-controller="AccountCtrl" class="margin-base-vertical" ng-submit="login()" novalidate>-->
-
-            <!--<label>Your Password</label>-->
-
-            <!--<p ng-show="SignInForm.password.$error.required"><span class="text-warning">Type password!</span></p>-->
-
-            <!--<p ng-show="SignInForm.password.$error.minlength"><span class="text-danger">Too short!</span></p>-->
-
-            <!--<p ng-show="SignInForm.password.$valid">-->
-                <!--<span class="text-success">Hit enter key or click submit if you think password is complete.</span></p>-->
-
-            <!--<p class="input-group" ng-class="{ 'has-error': SignInForm.password.$error.required || SignInForm.password.$error.minlength }">-->
-                <!--<span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>-->
-                <!--<input type="password" class="form-control input-large" ng-model="password" name="password"-->
-                       <!--ng-pattern="" placeholder="" ng-minlength="8" required=""/>-->
-            <!--</p>-->
-
-            <!--<label>Your Password</label>-->
-
-            <!--<p ng-show="SignInForm.password.$error.required"><span class="text-warning">Type password!</span></p>-->
-
-            <!--<p ng-show="SignInForm.password.$error.minlength"><span class="text-danger">Too short!</span></p>-->
-
-            <!--<p ng-show="SignInForm.password.$valid">-->
-                <!--<span class="text-success">Hit enter key or click submit if you think password is complete.</span></p>-->
-
-            <!--<p class="input-group" ng-class="{ 'has-error': SignInForm.password.$error.required || SignInForm.password.$error.minlength }">-->
-                <!--<span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>-->
-                <!--<input type="password" class="form-control input-large" ng-model="password" name="password"-->
-                       <!--ng-pattern="" placeholder="" ng-minlength="8" required=""/>-->
-            <!--</p>-->
-
-            <!--<p class="text-center">-->
-                <!--<button ng-hide="" style="" type="submit" ng-disabled="!SignInForm.$valid || failed || clicked" class="btn btn-success btn-large">-->
-                    <!--&lt;!&ndash;<span ng-hide="">Sign in! <img ng-show="clicked" src="assets/static/icons/ajax-loader_clock.gif"/></span>&ndash;&gt;-->
-                    <!--<span ng-hide="clicked">Sign in!</span>-->
-                    <!--<span ng-show="clicked">Pending.</span>-->
-                <!--</button>-->
-            <!--</p>-->
-
-        <!--</form>-->
-
-    <!--</div>-->
-<!--</div>-->
-
-<!-- START THE FEATURETTES -->
-
 <div class="row featurette">
     <div class="col-md-7">
         <h2 class="featurette-heading">Profile page.
         </h2>
+
+        <% if Rails.env.development? %>
+            {{currentUser | json}}
+        <% end %>
+
+        <p class="lead">
+            <span class="text-warning" ng-show="!currentUser.confirmed">Account still unconfirmed - see your mail for instructions!</span>
+            <span class="text-success" ng-show="currentUser.confirmed">Account confirmed</span>
+        </p>
+
+        <form name="PasswordChangeForm" ng-controller="AccountCtrl" class="margin-base-vertical" ng-submit="changePassword(password)" novalidate>
+
+            <legend>Change Password Form</legend>
+
+            <label>Your Password</label>
+
+            <p ng-show="PasswordChangeForm.password.$error.required"><span class="text-warning">Type password!</span>
+            </p>
+
+            <p ng-show="PasswordChangeForm.password.$error.minlength"><span class="text-danger">Too short!</span></p>
+
+            <p class="input-group" ng-class="{ 'has-error': PasswordChangeForm.password.$error.required || PasswordChangeForm.password.$error.minlength }">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+                <input type="password" class="form-control input-large" ng-model="password" name="password"
+                       ng-pattern="" placeholder="" ng-minlength="8" required=""/>
+            </p>
+
+            <label>Password Confirmation</label>
+
+            <p ng-hide="password.length > 0">
+                <span class="text-warning">Repeat password!</span>
+            </p>
+
+            <p ng-show="password != password_repeat">
+                <span class="text-danger">Passwords do not match!</span>
+            </p>
+
+            <p class="input-group" ng-class="{ 'has-error': PasswordChangeForm.password_repeat.$error.required || PasswordChangeForm.password_repeat.$error.minlength }">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+                <input type="password" class="form-control input-large" ng-model="password_repeat" name="password_repeat"
+                       ng-pattern="" placeholder="" ng-minlength="8" required=""/>
+            </p>
+
+            <p class="text-center">
+                <button ng-hide="" style="" type="submit" ng-disabled="!PasswordChangeForm.$valid || password != password_repeat" class="btn btn-success btn-large">
+                    <span>Change Password</span>
+                </button>
+            </p>
+
+        </form>
+
     </div>
 
 </div>

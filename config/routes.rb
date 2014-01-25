@@ -1,6 +1,6 @@
 App::Application.routes.draw do
 
-  devise_for :users, skip: :all # [:registration, :session, :password]
+  devise_for :users, skip: :all
   devise_scope :user do
     post "users/sign_up" => "users/registrations#create"
     
@@ -11,6 +11,12 @@ App::Application.routes.draw do
     get "users/confirmation/new" => "users/confirmations#new" #, as: "new_user_confirmation"
     post "users/confirmation" => "users/confirmations#create" #, as: "user_confirmation"
     get "users/confirmation/:confirmation_token/:id" => "users/confirmations#show", as: "confirmation"
+
+    #@TODO password
+
+    put "users/password" => "api/users#update"
+    patch "users/password" => "api/users#update"
+
   end
 
   
