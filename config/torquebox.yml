@@ -1,3 +1,4 @@
+#
 stomp:
   host: somehost.com
   stomplets:
