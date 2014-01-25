@@ -34,6 +34,9 @@ app.config(
             return promise.then(function (response) {
               return response;
             }, function (response) {
+              if (response.status == 302){
+                $rootScope.$broadcast('event:redirect', response.data.path);
+              }
               if (response.status >= 400 && response.status < 500) {
 
                 if (response.status === 401) {
