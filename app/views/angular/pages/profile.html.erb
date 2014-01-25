@@ -8,7 +8,7 @@
             <span class="text-success" ng-show="currentUser.confirmed">Account confirmed</span>
         </p>
 
-        <form name="PasswordChangeForm" ng-controller="AccountCtrl" class="margin-base-vertical" ng-submit="login()" novalidate>
+        <form name="PasswordChangeForm" ng-controller="AccountCtrl" class="margin-base-vertical" ng-submit="changePassword()" novalidate>
 
             <legend>Change Password Form</legend>
 
@@ -43,7 +43,7 @@
 
             <p class="text-center">
                 <button ng-hide="" style="" type="submit" ng-disabled="!PasswordChangeForm.$valid || password != password_repeat" class="btn btn-success btn-large">
-                    <span ng-hide="clicked">Change Password</span>
+                    <span>Change Password</span>
                 </button>
             </p>
 
