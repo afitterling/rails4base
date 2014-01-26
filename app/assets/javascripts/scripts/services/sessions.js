@@ -1,5 +1,5 @@
 angular.module('sessionService', [])
-  .factory('Session', ['$location', '$http', '$q', function ($location, $http, $q) {
+  .factory('Session', ['$location', '$http', '$q','$rootScope', function ($location, $http, $q, $rootScope) {
 
     var service = {
 
@@ -10,6 +10,8 @@ angular.module('sessionService', [])
               service.currentUser = data.user;
               var updatedAuthToken = headers('X-Csrf-Token');
               $http.defaults.headers.common['X-CSRF-TOKEN'] = updatedAuthToken;
+              $rootScope.authToken = updatedAuthToken;
+              console.log($rootScope.authToken);
               if (typeof successCallback !== 'undefined') {
                 successCallback(data, status);
               }

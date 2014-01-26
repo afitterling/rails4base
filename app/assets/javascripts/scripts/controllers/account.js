@@ -73,7 +73,7 @@ app.controller('AccountCtrl',
         var Password = $resource('/users/password', {id: '@id'}, { update: { method: 'PATCH', headers: { 'Content-Type': 'application/json' } } });
         Password.update({id: $scope.currentUser.id, password: password}, function(){
           // success
-          Session.login($scope.currentUser.email, password, function(){}, function(){});
+//          Session.login($scope.currentUser.email, password, function(){}, function(){});
           $scope.passwordChanged = true;
         }, function(){});
       };
