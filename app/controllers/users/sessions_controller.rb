@@ -2,8 +2,10 @@ class Users::SessionsController < Devise::SessionsController
 
   respond_to :json
 
+  # this is login!
   def create
     resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
+    response.headers['X-CSRF-Token'] = form_authenticity_token
     render :status => 200,
            :json => { :success => true,
                       :info => "Logged in",
@@ -15,6 +17,7 @@ class Users::SessionsController < Devise::SessionsController
   def destroy
     warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
     sign_out
+    response.headers['X-CSRF-Token'] = form_authenticity_token
     render :status => 200,
            :json => { :success => true,
                       :info => "Logged out",
@@ -30,13 +33,11 @@ class Users::SessionsController < Devise::SessionsController
 
   def user_logged_in
     warden.authenticate!(:scope => resource_name) #, :recall => "#{controller_path}#failure")
-    # take the devise user and build model myself monkey path as_json
-    user = User.where(id: current_user.id).first
-    render :status => 200,
-           :json => { :success => true,
-                      :info => "Current User",
-                      :user => user.as_json
-
+    user = User.find(current_user.id)
+    render status: 200,
+           json: { success: true,
+                      info: "Current User",
+                      user: user.as_json
            }
   end
 

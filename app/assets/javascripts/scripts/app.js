@@ -24,7 +24,7 @@ app.config(
 
       // steal the CSRF-Token on client side from rails server side rendered pages via jQuery
       var authToken = $("meta[name=\"csrf-token\"]").attr("content");
-      $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken;
+      $httpProvider.defaults.headers.common['X-CSRF-TOKEN'] = authToken;
 
       // errorHttpInterceptor
 

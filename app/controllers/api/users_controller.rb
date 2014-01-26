@@ -1,10 +1,8 @@
 class Api::UsersController < RestrictedApplicationController
 
-  respond_to :json
-
-  #@FIXME
   def update
     user = User.where(id: params[:id]).first
+    # only update password
     user.password = params[:password]
     if user.save
       render json: {}, status: 200

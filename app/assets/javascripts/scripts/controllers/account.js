@@ -3,8 +3,8 @@
 var app = angular.module('ctrls.account', []);
 
 app.controller('AccountCtrl',
-  ['$scope', '$rootScope', '$resource', '$http', '$timeout', 'Session',
-    function ($scope, $rootScope, $resource, $http, $timeout, Session) {
+  ['$scope', '$rootScope', '$resource', '$http', '$timeout', 'Session','$location',
+    function ($scope, $rootScope, $resource, $http, $timeout, Session, $location) {
 
       var origin = 'AccountCtrl';
 
@@ -23,6 +23,8 @@ app.controller('AccountCtrl',
           $rootScope.userLoggedIn = Session.isAuthenticated();
           $scope.clicked = false;
 
+          $location.path('/profile');
+
         }, function (data, status) {
 
           // error
@@ -39,15 +41,15 @@ app.controller('AccountCtrl',
       };
 
       // gets called upon sign up attempt
-      $scope.signup = function(){
+      $scope.signup = function () {
         $scope.clicked = true;
-        Session.speedReg($scope.email, function(){
+        Session.speedReg($scope.email, function () {
           // success!
           $rootScope.currentUser = Session.currentUser;
           $rootScope.userLoggedIn = Session.isAuthenticated();
           $scope.clicked = false;
 
-        }, function(data, status){
+        }, function (data, status) {
           // error
           $scope.failed = true;
           $scope.errors = data.errors
@@ -61,8 +63,8 @@ app.controller('AccountCtrl',
       };
 
       // logout
-      $scope.logout = function(){
-        Session.logout(function(){
+      $scope.logout = function () {
+        Session.logout(function (data, status, headers) {
           // success
           $rootScope.currentUser = Session.currentUser;
           $rootScope.userLoggedIn = Session.isAuthenticated();
@@ -74,6 +76,7 @@ app.controller('AccountCtrl',
         Password.update({id: $scope.currentUser.id, password: password}, function(){
           // success
           Session.login($scope.currentUser.email, password, function(){}, function(){});
+          $scope.passwordChanged = true;
         }, function(){});
       };
 
