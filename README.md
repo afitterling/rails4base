@@ -71,7 +71,7 @@ Ruby is supported without Torquebox and its specific features. It definately sho
 
 ## Reverse proxy
 
-Example Nginx config to use as reverse proxy:
+Example Nginx reverse proxy setup:
 
 
 ```
