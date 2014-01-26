@@ -26,6 +26,10 @@ In case of Torquebox:
 
 * easy maintainable / installable
 
+What happened to CSRF-Mechanisms, is it truly single page?
+
+* Yes. If the CSRF token changes (see devise issues) rails will send back the new updated CSRF token in the response header. Upon the response received Angular will re-update its default headers with the newly received token. However, because this mechanism is pure javascript based and hidden from user, the meta tag in the template, which we used to receive the CSRF the first time, will be outdated.
+
 What follows:
 
 * Torquebox features, such as realtime messaging between multi node servers and clients
@@ -72,16 +76,22 @@ Example Nginx config to use as reverse proxy:
 
 ```
 server {
- listen 80;
- server_name subpath.example.com;
- rewrite ^/subpath(/.*)$ $1 last; // if deploying with context path
- location / {
-   root /home/torquebox/railsapp/public;
-   proxy_pass http://87.230.18.238:8080/subpath/;
-   proxy_set_header   X-Real-IP        $remote_addr;
-   proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-   proxy_set_header   Host $http_host;
- }
-}
-```
+  listen 80;
+  listen 443;
+  ssl                  on;
+  ssl_certificate      /etc/nginx/server.crt;
+  ssl_certificate_key  /etc/nginx/server.key;
+  server_name rails4base.sp33c.de;
+  if ($server_port = 80) {
+    rewrite ^ https://$host$request_uri permanent;
+  }
+  rewrite ^/rails4base(/.*)$ $1 last;
+  location / {
+    root /home/torquebox/rails4base/public;
+    proxy_pass http://87.230.18.238:8080/rails4base/;
+    proxy_set_header   X-Real-IP        $remote_addr;
+    proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+    proxy_set_header   Host $http_host;
+  }
+}```
 
