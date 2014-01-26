@@ -98,14 +98,13 @@ app.run(['$rootScope', '$http', 'logService', 'Session', '$location', '$template
 
   var templates = [
     '/angular/pages/home',
-    '/angular/pages/features'
+    '/angular/pages/features',
   ];
 
   for (var i = 0; i < templates.length; i++) {
-    $http.get(templates[i])
-      .success(function (data) {
-        $templateCache.put(templates[i], data);
-      });
+    $http.get(templates[i], { cache: true }).success(function(){
+      //
+    });
   }
 
   // patch method
