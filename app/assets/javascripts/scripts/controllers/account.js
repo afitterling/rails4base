@@ -3,8 +3,8 @@
 var app = angular.module('ctrls.account', []);
 
 app.controller('AccountCtrl',
-  ['$scope', '$rootScope', '$resource', '$http', '$timeout', 'Session',
-    function ($scope, $rootScope, $resource, $http, $timeout, Session) {
+  ['$scope', '$rootScope', '$resource', '$http', '$timeout', 'Session','$location',
+    function ($scope, $rootScope, $resource, $http, $timeout, Session, $location) {
 
       var origin = 'AccountCtrl';
 
@@ -22,6 +22,8 @@ app.controller('AccountCtrl',
           $rootScope.currentUser = Session.currentUser;
           $rootScope.userLoggedIn = Session.isAuthenticated();
           $scope.clicked = false;
+
+          $location.path('/profile');
 
         }, function (data, status) {
 
@@ -73,7 +75,7 @@ app.controller('AccountCtrl',
         var Password = $resource('/users/password', {id: '@id'}, { update: { method: 'PATCH', headers: { 'Content-Type': 'application/json' } } });
         Password.update({id: $scope.currentUser.id, password: password}, function(){
           // success
-//          Session.login($scope.currentUser.email, password, function(){}, function(){});
+          Session.login($scope.currentUser.email, password, function(){}, function(){});
           $scope.passwordChanged = true;
         }, function(){});
       };
