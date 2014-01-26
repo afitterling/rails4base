@@ -39,15 +39,15 @@ app.controller('AccountCtrl',
       };
 
       // gets called upon sign up attempt
-      $scope.signup = function(){
+      $scope.signup = function () {
         $scope.clicked = true;
-        Session.speedReg($scope.email, function(){
+        Session.speedReg($scope.email, function () {
           // success!
           $rootScope.currentUser = Session.currentUser;
           $rootScope.userLoggedIn = Session.isAuthenticated();
           $scope.clicked = false;
 
-        }, function(data, status){
+        }, function (data, status) {
           // error
           $scope.failed = true;
           $scope.errors = data.errors
@@ -61,8 +61,8 @@ app.controller('AccountCtrl',
       };
 
       // logout
-      $scope.logout = function(){
-        Session.logout(function(data, status, headers){
+      $scope.logout = function () {
+        Session.logout(function (data, status, headers) {
           // success
           $rootScope.currentUser = Session.currentUser;
           $rootScope.userLoggedIn = Session.isAuthenticated();

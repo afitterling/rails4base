@@ -24,10 +24,10 @@ angular.module('sessionService', [])
       logout: function (successCallback, redirectTo) {
         $http.get('/users/logout').success(function (data, status, headers) {
           service.currentUser = null;
+          var updatedAuthToken = headers('X-Csrf-Token');
+          $http.defaults.headers.common['X-CSRF-TOKEN'] = updatedAuthToken;
           if (typeof successCallback !== 'undefined') {
             successCallback(data, status, headers);
-            var updatedAuthToken = headers('X-Csrf-Token');
-            $http.defaults.headers.common['X-CSRF-TOKEN'] = updatedAuthToken;
           }
           $location.path('/home');
         });

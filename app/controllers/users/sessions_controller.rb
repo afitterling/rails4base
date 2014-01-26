@@ -32,6 +32,7 @@ class Users::SessionsController < Devise::SessionsController
   def user_logged_in
     warden.authenticate!(:scope => resource_name) #, :recall => "#{controller_path}#failure")
     user = User.find(current_user.id)
+    response.headers['X-CSRF-Token'] = form_authenticity_token
     render status: 200,
            json: { success: true,
                       info: "Current User",
