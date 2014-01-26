@@ -26,9 +26,9 @@ In case of Torquebox:
 
 * easy maintainable / installable
 
-What happened to CSRF-Mechanisms, is it truly single page?
+What happened to the CSRF mechanisms, is it truly single page?
 
-* Yes. If the CSRF token changes (see devise issues) rails will send back the new updated CSRF token in the response header. Upon the response received Angular will re-update its default headers with the newly received token. However, because this mechanism is pure javascript based and hidden from user, the meta tag in the template, which we used to receive the CSRF the first time, will be outdated.
+* Yes. If the CSRF token changes (see devise issues) rails will send back the new updated CSRF token in the response header. Upon the response received, Angular will re-update its default headers with the newly received token. However, because this mechanism is pure javascript based, the meta tag in the html rendered, which we used to receive the CSRF token on page reload and bootstrapping, will be outdated.
 
 What follows:
 
