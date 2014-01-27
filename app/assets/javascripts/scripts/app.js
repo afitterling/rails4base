@@ -98,14 +98,14 @@ app.run(['$rootScope', '$http', 'logService', 'Session', '$location', '$template
 
   var templates = [
     '/angular/pages/home',
-    '/angular/pages/features'
+    '/angular/pages/features',
   ];
 
   for (var i = 0; i < templates.length; i++) {
-    $http.get(templates[i])
-      .success(function (data) {
-        $templateCache.put(templates[i], data);
-      });
+    // check: http://stackoverflow.com/questions/18714690/is-there-a-way-to-preload-templates-and-controllers-when-using-angularjs-routing
+    $http.get(templates[i], {cache: $templateCache}).success(function(){
+      //
+    });
   }
 
   // patch method
