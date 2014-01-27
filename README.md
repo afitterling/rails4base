@@ -65,9 +65,10 @@ Setting RAILS_RELATIVE_URL_ROOT is necessary if deploying to context path:
 `RAILS_RELATIVE_URL_ROOT='/subpath' RAILS_ENV=production torquebox deploy --context-path='/subpath'`
 
 
-### I prefer Ruby over JRuby.
+### Ruby vs. JRuby
 
-Ruby is supported without Torquebox and its specific features. It definately should work until or around commit: `f7634f46b8d882fb496ab050fdffce4d028cf03c`
+Ruby is supported without Torquebox (master/dev branch).
+JRuby/Torquebox features are (going to be) implemented in feature/torquebox.
 
 ## Reverse proxy
 
