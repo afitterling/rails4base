@@ -71,6 +71,10 @@ app.controller('AccountCtrl',
         });
       };
 
+      $scope.resendConfirmationRequest = function(){
+        Session.confirmationRequest();
+      };
+
       $scope.changePassword = function(password){
         var Password = $resource('/users/password', {id: '@id'}, { update: { method: 'PATCH', headers: { 'Content-Type': 'application/json' } } });
         Password.update({id: $scope.currentUser.id, password: password}, function(){
