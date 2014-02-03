@@ -1,0 +1,14 @@
+secret: 8da320f73db202d5a271012f69dec4b4ec21acb0c702a2ec1936b898b7bf40990856d11c5440654ea362fdb81f1df3561b51fbac0f478ae38171e919e504ea7d
+
+devise:
+  secret: 8da320f73db202d5a271012f69dec4b4ec21acb0c702a2ec1936b898b7bf40990856d11c5440654ea362fdb81f1df3561b51fbac0f478ae38171e919e504ea7d
+
+mailer:
+  domain: app1.sp33c.de
+  from: info@sp33c.de
+
+  smtp_settings:
+    address:
+    openssl_verify_mode: none
+
+

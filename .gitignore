@@ -18,3 +18,5 @@
 /shared/config/database.yml
 
 /shared/config/secret_token.rb
+
+/shared/config/application.yml

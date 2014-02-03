@@ -78,7 +78,7 @@ App::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.action_mailer.default_url_options = { :host => "rails4base.sp33c.de" }
+  config.action_mailer.default_url_options = { :host => APP_CONFIG[:mailer][:domain] }
 
   config.action_mailer.smtp_settings = {
   #    address: "mail.seamlesslywired.com",
@@ -88,7 +88,7 @@ App::Application.configure do
   #    enable_starttls_auto: true,
   #    user_name: ENV["GMAIL_USERNAME"],
   #    password: ENV["GMAIL_PASSWORD"]
-       openssl_verify_mode: 'none'
+       openssl_verify_mode: APP_CONFIG[:mailer][:smtp_settings][:openssl_verify_mode]
   }
 
 end

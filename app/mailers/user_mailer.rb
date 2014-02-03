@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "notifications@sp33c.de"
+  default from: APP_CONFIG[:mailer][:from]
 
   def sign_up_confirmation_mail(user, password)
     @user = user
