@@ -1,19 +1,28 @@
+application:
+
+queues:
+  /queues/queue1:
+
+messaging:
+  /queues/queue1: MyConsumer
+#  /topics/long_lived_topic: MyBazHandler
 #
-stomp:
-  host: somehost.com
-  stomplets:
-    stomplet.one:
-      route: '/queues/:queue_name'
-      class: StompletOne
-    foo.stomplet:
-      route: '/bridge/foo'
-      class: BridgeStomplet
-      config:
-        type: queue
-        destination: /jms-queues/foo
-    bar.stomplet:
-      route: '/bridge/bar'
-      class: BridgeStomplet
-      config:
-        type: topic
-        destination: /jms-topics/bar
+
+#stomp:
+#  host: somehost.com
+#  stomplets:
+#    stomplet.one:
+#      route: '/queues/:queue_name'
+#      class: StompletOne
+#    foo.stomplet:
+#      route: '/bridge/foo'
+#      class: BridgeStomplet
+#      config:
+#        type: queue
+#        destination: /jms-queues/foo
+#    bar.stomplet:
+#      route: '/bridge/bar'
+#      class: BridgeStomplet
+#      config:
+#        type: topic
+#        destination: /jms-topics/bar
