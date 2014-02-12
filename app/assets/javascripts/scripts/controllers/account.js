@@ -81,6 +81,10 @@ app.controller('AccountCtrl',
           // success
           Session.login($scope.currentUser.email, password, function(){}, function(){});
           $scope.passwordChanged = true;
+          $scope.pending = false;
+//          $timeout(function(){
+//            $scope.passwordChanged = false;
+//          }, 5000)
         }, function(){});
       };
 

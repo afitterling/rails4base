@@ -1,5 +1,5 @@
 <div class="row featurette">
-    <div class="col-md-7" ng-controller="AccountCtrl">
+    <div class="col-md-6" ng-controller="AccountCtrl">
         <h2 class="featurette-heading">Profile page.
         </h2>
 
@@ -20,7 +20,7 @@
             <a ng-click="passwordChange=!passwordChange"><span class="glyphicon glyphicon-pencil"></span> change your password</a>
         </p>
 
-        <form ng-show="passwordChange" name="PasswordChangeForm" class="margin-base-vertical" ng-submit="changePassword(password)" novalidate>
+        <form ng-show="passwordChange" name="PasswordChangeForm" class="margin-base-vertical" ng-submit="pending=true; changePassword(password)" novalidate>
 
             <legend>Change Password Form</legend>
 
@@ -54,8 +54,8 @@
             </p>
 
             <p class="text-center">
-                <button ng-hide="" style="" type="submit" ng-disabled="!PasswordChangeForm.$valid || password != password_repeat" class="btn btn-success btn-large">
-                    <span>Change Password</span>
+                <button ng-hide="" style="" type="submit" ng-disabled="pending || !PasswordChangeForm.$valid || password != password_repeat" class="btn btn-success btn-large">
+                    <span ng-show="!pending">Change Password</span><span ng-show="pending">pending</span>
                 </button>
             </p>
 

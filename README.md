@@ -88,7 +88,6 @@ server {
   }
   rewrite ^/rails4base(/.*)$ $1 last;
   location / {
-    root /home/torquebox/rails4base/public;
     proxy_pass http://87.230.18.238:8080/rails4base/;
     proxy_set_header   X-Real-IP        $remote_addr;
     proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
